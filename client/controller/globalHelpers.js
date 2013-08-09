@@ -1,9 +1,14 @@
 Handlebars.registerHelper('currClub', function(){
   var clubName = Session.get('currClubName');
-  var club = Clubs.findOne({name: {$regex: clubName, $options: 'i'}});
+  var club = Clubs.findOne({name: clubName});
   if (club){
     return club;
   } else {
+    // try to be more tolerant
+    club = Clubs.findOne({name: {$regex: clubName, $options: 'i'}});
+    if (club) {
+      return club;
+    }
     return {name: "The club you are searching for is not available."}
   }
 });

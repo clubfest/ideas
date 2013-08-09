@@ -1,9 +1,9 @@
 Meteor.Router.add({
   '/': 'home',
   '/instruction': 'instruction',
-  '/create_club': 'create_club',
+  '/createClub': 'createClub',
   '/categories': function(){
-    return 'all_clubs';
+    return 'allClubs';
   },
   '/categories/:name': function(name){
     Session.set('currCategoryName', name);
@@ -16,6 +16,6 @@ Meteor.Router.add({
   '/edit_club/:name': function(name){
     Session.set('currClubName', name)
     console.log(name)
-    return 'edit_club'
+    return 'editClub'
   }
 });
