@@ -1,0 +1,33 @@
+<template name="home">
+  <h1>Cornell Club Fest</h1>
+  <ul class='no-bullet'>
+    {{#each getCategories}}
+      <li class='spaced'><a href='/categories/{{name}}'>{{name}}</a></li>
+    {{/each}}
+  </ul>
+  
+    <h2>About</h2>
+    <p>
+      Club Fest is an afternoon event in Cornell where students learn about the hundreds of clubs on campus. It's a pity that this happens only once a year.
+    </p>
+    <h3>Students</h3>
+    <p>
+      The goal of this site is to take Club Fest onto the web so that students can "go to" Club Fest any time of the year.
+    </p>
+    <p>
+      You can roam the site for information and join mailing lists if you are interested. The nice thing is that you can easily unjoin any mailing list that is cluttering your Cornell inbox.
+    </p>
+    <p>
+      Tell your classmates and clubs about us.
+    </p>
+    <h3>Organizations</h3>
+    <p>
+      The goal is to provide clubs the opportunity to advertise outside of Club Fest. Also, we provide tools to handle mailing list so that you don't have to add and remove emails from the list manually.
+    </p>
+    <p>
+      After you create a club page, put some content, pictures, youtube videos, etc. Watch <a href='/instruction'>this video</a> for further instruction.
+    </p>
+
+    <a href="/create_club" class='btn btn-primary'>Create a page for your club</a>
+
+</template>
