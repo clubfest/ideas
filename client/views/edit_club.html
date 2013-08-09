@@ -1,0 +1,9 @@
+<template name='edit_club'>
+{{#with currClub}}
+  <h1>{{name}}</h1>
+  <textarea>{{{content}}}</textarea>
+  <br/>
+  <a class='btn-primary btn' href='/clubs/{{name}}'>Save</a>
+{{/with}}
+
+</template>

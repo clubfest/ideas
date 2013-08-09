@@ -1,0 +1,7 @@
+#clubs *{
+  list-style: none;
+}
+
+#clubs > li {
+  padding: 5px;
+}

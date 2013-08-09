@@ -1,0 +1,13 @@
+<template name='clubs'>
+  <h1>All clubs</h1>
+  <ul id='clubs'>
+  {{#each getClubs}}
+    <li>
+      <a href='/clubs/{{name}}'>{{name}}</a>
+      <ul>
+        <li>{{desc}}</li>
+      </ul>
+    </li>
+  {{/each}}
+  </ul>
+</template>

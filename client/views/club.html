@@ -1,0 +1,16 @@
+<template name='club'>
+  <div id='join'>
+    <a class='btn'>Join our mailing list</a>
+  </div>
+
+  {{#with currClub}}
+  <h1>{{name}}</h1>
+
+  <div id='club-content'>
+    {{{content}}}
+
+  </div>
+  <a href='/edit_club/aikido'>Edit</a>
+  {{/with}}
+
+</template>
