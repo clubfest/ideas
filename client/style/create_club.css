@@ -1,4 +1,12 @@
 
+body {
+  max-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
 label{
   cursor: pointer;
 }
