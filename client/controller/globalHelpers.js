@@ -1,5 +1,6 @@
 Handlebars.registerHelper('currClub', function(){
   var clubName = Session.get('currClubName');
+  console.log(clubName)
   var club = Clubs.findOne({name: clubName});
   if (club){
     return club;

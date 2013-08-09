@@ -13,7 +13,7 @@ Meteor.Router.add({
     Session.set('currClubName', name)
     return 'club'
   },
-  '/edit_club/:name': function(name){
+  '/editClub/:name': function(name){
     Session.set('currClubName', name)
     console.log(name)
     return 'editClub'
