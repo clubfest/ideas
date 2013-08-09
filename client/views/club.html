@@ -4,13 +4,17 @@
   </div>
 
   {{#with currClub}}
-  <h1>{{name}}</h1>
+    {{#if err}}
+      <h1>{{msg}}</h1>
+    {{else}}
+      <h1>{{name}}</h1>
 
-  <div id='club-content'>
-    {{{content}}}
+      <div id='club-content'>
+        {{{content}}}
 
-  </div>
-  <a href='/editClub/{{name}}'>Edit</a>
+      </div>
+      <a href='/editClub/{{name}}'>Edit</a>
+    {{/if}}
   {{/with}}
 
 </template>

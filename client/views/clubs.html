@@ -1,15 +1,20 @@
 <template name='clubs'>
-  {{#with currCategory}}
-    <h1>{{name}}</h1>
-  {{/with}}
+{{#with currCategoryClubs}}
+  {{#if err}}
+    <h1>{{msg}}</h1>
+  {{else}}
+    <h1>{{categoryName}}</h1>
+  {{/if}}
   <ul id='clubs'>
-  {{#each getClubs}}
-    <li>
-      <a href='/clubs/{{name}}'>{{name}}</a>
-      <ul>
-        <li>{{desc}}</li>
-      </ul>
-    </li>
-  {{/each}}
+    {{#each clubs}}
+      <li>
+        <a href='/clubs/{{name}}'>{{name}}</a>
+        <ul>
+          <li>{{desc}}</li>
+        </ul>
+      </li>
+    {{/each}}
   </ul>
+{{/with}}
+
 </template>

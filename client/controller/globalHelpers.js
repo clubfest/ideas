@@ -1,28 +1,85 @@
+// Used for club.html and editClub.html
 Handlebars.registerHelper('currClub', function(){
-  var clubName = Session.get('currClubName');
-  console.log(clubName)
-  var club = Clubs.findOne({name: clubName});
-  if (club){
-    return club;
+  var club = clubNameToObject(Session.get('routedClubName'));
+  console.log(club)
+  if (club==null){
+    return {err: true, msg: 'Invalid club name'}
   } else {
-    // try to be more tolerant
+    return club;
+  }
+});
+
+this.clubNameToObject = function(clubName, exact){
+  var club = Clubs.findOne({name: clubName});
+  var answer
+  if (club){
+    answer = club;
+  } else if (exact){
+    return null;
+  } else {
     club = Clubs.findOne({name: {$regex: clubName, $options: 'i'}});
     if (club) {
-      return club;
+      answer = club
+    } else {
+      answer = null;
     }
-    return {name: "The club you are searching for is not available."}
   }
-});
+  return answer;
+}
 
-Handlebars.registerHelper('currCategory', function(){
-  var categoryName = Session.get('currCategoryName');
-
-  var category = Categories.findOne({name: {$regex: categoryName, $options: 'i'}}, {sort: {_id: -1}});
-  if (category){
-    // make sure clubs are displayed from the correct category later
-    Session.set('currCategoryName', category.name);
-    return category;
+// used in editClub.js
+this.clubNameToId = function(clubName, exact){
+  var club = clubNameToObject(clubName, exact);
+  if (club){
+    return club._id;
   } else {
-    return {name: "The category you are searching for is not available."}
+    return null
   }
-});
+}
+
+
+// Handlebars.registerHelper('currCategory', function(){
+//   var category = categoryNameToObject(Session.get('routedCategoryName'));
+//   return category;
+// });
+
+// Handlebars.registerHelper('getClubs', function(){
+//   var categoryName = Session.get('currCategoryName');
+//   var clubs = Clubs.find({category: categoryName}).fetch();
+//   return clubs
+// });
+
+
+// function clubNameToObject(clubName){
+//   var club = Clubs.findOne({name: clubName});
+//   var answer
+//   if (club){
+//     answer = club;
+//   } else {
+//     club = Clubs.findOne({name: {$regex: clubName, $options: 'i'}});
+//     if (club) {
+//       answer = club
+//     } else {
+//       answer = null;
+//     }
+//   }
+//   return answer;
+// }
+
+// function categoryNameToObject(categoryName){
+//   var category = Categories.findOne({name: categoryName});
+//   var answer
+//   if (category){
+//     answer = category;
+//   } else {
+//     category = Categories.findOne({name: {$regex: categoryName, $options: 'i'}});
+//     if (category) {
+//       answer = category
+//     } else {
+//       answer = null;
+//     }
+//   }
+//   return answer;
+// }
+
+

@@ -6,16 +6,15 @@ Meteor.Router.add({
     return 'allClubs';
   },
   '/categories/:name': function(name){
-    Session.set('currCategoryName', name);
+    Session.set('routedCategoryName', name);
     return 'clubs';
   },
   '/clubs/:name': function(name){
-    Session.set('currClubName', name)
-    return 'club'
+    Session.set('routedClubName', name)
+    return 'club';
   },
   '/editClub/:name': function(name){
-    Session.set('currClubName', name)
-    console.log(name)
-    return 'editClub'
+    Session.set('routedClubName', name)
+    return 'editClub';
   }
 });

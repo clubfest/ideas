@@ -28,6 +28,11 @@ Meteor.startup(function() {
     });
     Categories.insert({
       depth: 1,
+      name: "Performing",
+      desc: "Fun stuff"
+    })
+    Categories.insert({
+      depth: 1,
       name: "Political",
       desc: "It's time to save the government"
     });
