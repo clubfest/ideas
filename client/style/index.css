@@ -9,3 +9,8 @@ body {
 .no-bullet *{
   list-style: none;
 }
+
+.navbar {
+  bottom: 0;
+  float: right;
+}

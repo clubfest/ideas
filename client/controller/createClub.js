@@ -4,30 +4,23 @@ Template.createClub.categories = function(){
 Template.createClub.events({
   'submit': function(evt, tmpl){
     evt.preventDefault();
-    name = tmpl.find('#name').value;
-    desc = tmpl.find('#desc').value;
-    category = tmpl.find('#category').value;
-    var err_msg = findError(name, desc, category);
-    if (err_msg){
-      alert(err_msg);
-      return;
-    } else {
-      Clubs.insert(
-        {
-          name: name,
-          desc: desc,
-          category: category,
-          depth: 2,
-          content: '<p>'+desc+'</p> <h3>About</h3> <h3>Meeting time</h3>'
-        }, function(err){
-          if (err){
-            alert(err);
-          } else {
-            Meteor.Router.to('/clubs/'+name);
-          }
-        }
-      );
+    var newClub = {
+      name: tmpl.find('#name').value,
+      desc: tmpl.find('#desc').value,
+      category: tmpl.find('#category').value,
+      content: '<h3>About</h3> \
+        <p>Click edit to add info</p>\
+        <h3>Meeting time</h3>'
     }
+    Meteor.call("insertClub", newClub,
+      function(err, result){
+        if (err) {
+          alert(err.reason);
+        } else {
+          Meteor.Router.to('/clubs/'+newClub.name);
+        }
+      }
+    );
   }
 })
 
