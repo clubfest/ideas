@@ -1,9 +1,13 @@
 <template name='club'>
-  <div id='join'>
-    <a class='btn'>Join this club's mailing list</a>
-  </div>
-
   {{#with currClub}}
+    <div class='navbar'>
+      <a href="/categories/{{category}}">{{category}}</a>
+    </div>
+    <div id='join'>
+      <a class='btn'>Join this club's mailing list</a>
+    </div>
+
+  
     {{#if err}}
       <h1>{{msg}}</h1>
     {{else}}

@@ -1,14 +1,17 @@
 <template name='createClub'>
+<h2>Create a club</h2>
 <form>
   <label for='name'>Club Name</label>
   <input type='text' id='name'/>
   <br/>
   <label for='desc'>Brief Description</label>
-  <input type='text' id='desc'/>
+  <textarea id='desc' placeholder='140 characters or less'></textarea>
   <br/>
   <select id='category'>
     <option value="" disabled selected>Category for your club</option>
-    <option value='Academic'>Academic</option>
+    {{#each categories}}
+      <option value='{{name}}'>{{name}}</option>
+    {{/each}}
   </select>
   <br/>
   <input type='submit'/>

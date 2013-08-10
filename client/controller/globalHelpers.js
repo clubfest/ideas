@@ -1,7 +1,6 @@
 // Used for club.html and editClub.html
 Handlebars.registerHelper('currClub', function(){
   var club = clubNameToObject(Session.get('routedClubName'));
-  console.log(club)
   if (club==null){
     return {err: true, msg: 'Invalid club name'}
   } else {
@@ -11,7 +10,7 @@ Handlebars.registerHelper('currClub', function(){
 
 this.clubNameToObject = function(clubName, exact){
   var club = Clubs.findOne({name: clubName});
-  var answer
+  var answer;
   if (club){
     answer = club;
   } else if (exact){

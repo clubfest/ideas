@@ -1,3 +1,6 @@
+Template.createClub.categories = function(){
+  return Categories.find().fetch();
+}
 Template.createClub.events({
   'submit': function(evt, tmpl){
     evt.preventDefault();
