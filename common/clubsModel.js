@@ -1,3 +1,5 @@
+Clubs = new Meteor.Collection('Clubs')
+
 Meteor.methods({
   insertClub: function(club){
     checkClubFields(club);
