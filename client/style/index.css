@@ -11,6 +11,12 @@ body {
 }
 
 .navbar {
-  bottom: 0;
+}
+
+.float-right{
   float: right;
+}
+
+.clear-float {
+  clear: both;
 }
