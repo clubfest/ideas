@@ -16,7 +16,6 @@ function categoryNameToObject(categoryName){
 
 Template.clubs.currCategoryClubs = function(){
   var category = categoryNameToObject(Session.get('routedCategoryName'));
-  console.log(category);
   if (category == null){
     return {err: true, msg: 'Invalid category',
       clubs: Clubs.find({}).fetch()}
