@@ -8,33 +8,19 @@ Handlebars.registerHelper('currClub', function(){
   }
 });
 
-this.clubNameToObject = function(clubName, exact){
-  var club = Clubs.findOne({name: clubName});
-  var answer;
-  if (club){
-    answer = club;
-  } else if (exact){
-    return null;
-  } else {
-    club = Clubs.findOne({name: {$regex: clubName, $options: 'i'}});
-    if (club) {
-      answer = club
-    } else {
-      answer = null;
+// Used for editClub.html
+Handlebars.registerHelper('isClubAdmin', function(){
+  var clubId = clubNameToId(Session.get('routedClubName'));
+  var user = Meteor.user()
+  if (user){
+    if (isClubAdmin(user, clubId)){
+      return true;
     }
-  }
-  return answer;
-}
-
-// used in editClub.js
-this.clubNameToId = function(clubName, exact){
-  var club = clubNameToObject(clubName, exact);
-  if (club){
-    return club._id;
   } else {
-    return null
+    return false;
   }
-}
+});
+
 
 
 // Handlebars.registerHelper('currCategory', function(){

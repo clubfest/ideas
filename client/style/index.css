@@ -1,4 +1,4 @@
-body {
+#body-wrapper {
   max-width: 600px;
   width: 90%;
   margin: 0 auto;
@@ -10,13 +10,18 @@ body {
   list-style: none;
 }
 
-.navbar {
-}
-
-.float-right{
+#nav {
   float: right;
+  margin-right: 50px;
+  margin-top: 20px;
 }
 
-.clear-float {
+#nav-wrapper {
   clear: both;
+}
+
+
+p {
+  line-height: 150%;
+  padding: 5px;
 }

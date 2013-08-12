@@ -1,0 +1,16 @@
+#club-admin-nav {
+  float: right;
+  margin-right: 50px;
+}
+
+#club-admin-nav a {
+  padding: 10px;
+}
+
+#club-admin-nav-wrapper {
+  clear: both;
+}
+
+#join-bar {
+  margin-top: 20px;
+}

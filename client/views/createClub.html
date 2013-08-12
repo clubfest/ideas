@@ -7,10 +7,10 @@
   <label for='desc'>Brief Description</label>
   <textarea id='desc' placeholder='140 characters or less'></textarea>
   <br/>
-  <select id='category'>
+  <select id='categoryId'>
     <option value="" disabled selected>Category for your club</option>
     {{#each categories}}
-      <option value='{{name}}'>{{name}}</option>
+      <option value='{{_id}}'>{{name}}</option>
     {{/each}}
   </select>
   <br/>

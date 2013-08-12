@@ -1,8 +1,8 @@
 <template name="home">
-  <h1>Cornell Club Fest</h1>
+  <h1>Club.Fest.on.Meteor</h1>
   <ul class='no-bullet'>
     {{#each getCategories}}
-      <li class='spaced'><a href='/categories/{{name}}'>{{name}}</a></li>
+      <li class='spaced'><a href='/categoryId/{{_id}}'>{{name}}</a></li>
     {{/each}}
   </ul>
   
@@ -15,7 +15,7 @@
     The goal of this site is to take Club Fest onto the web so that students can "go to" Club Fest any time of the year.
   </p>
   <p>
-    You can roam the site for information and join mailing lists if you are interested. The nice thing is that you can easily unjoin any mailing list that is cluttering your Cornell inbox.
+    You can roam the site for information and join mailing lists if you are interested. The nice thing is that you can easily unjoin any mailing list that is cluttering your inbox.
   </p>
   <p>
     Tell your classmates and clubs about us.
@@ -25,14 +25,16 @@
     The goal is to provide clubs the opportunity to advertise outside of Club Fest. Also, we provide tools to handle mailing list so that you don't have to add and remove emails from the list manually. 
   </p>
   <p>
-    To create a page, click the button below. For further instruction, watch <a href='/instruction'>this video</a> and learn how to put content, pictures, youtube videos to your page.
+    To create a club fest page, click the button below. For further instruction, watch <a href='/instruction'>this video</a> and learn how to put content, pictures, youtube videos on your page.
   </p>
   <p>
-  <a href="/createClub" class='btn btn-primary'>Create a page for your club</a>
+    <a href="/createClub" class='btn btn-primary'>
+      Create a club fest page for your club
+    </a>
   </p>
 
   <p>
-    Finally, we offer you a way to use this during the actual Club Fest. Just open up the page you have created, sign in, and click "Get Mailing List", which would then provide a textbox for passerby to enter their emails. But of course, it's even easier if you ask them to visit your site on their own smart-phone and click the "join" button.
+    Finally, we offer you a way to use this during the actual Club Fest. Just navigate to your club fest page, sign in, and click "Mailing List", which would then provide a textbox for passerby to enter their emails.
   </p>
 
 </template>

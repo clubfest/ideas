@@ -1,26 +1,40 @@
 <template name='club'>
-  {{#with currClub}}
-      
-    {{#if err}}
+  {{#with getClub}}
+    {{#if club}}
+      {{#with club}}
+        <div>
+          <a href='/categoryId/{{categoryId}}'>
+            <i class='icon-chevron-up'></i> {{categoryName}}
+          </a>
+        </div>
+
+        <h1>{{name}}</h1>
+        <div id='club-content'>
+          {{{content}}}
+        </div>
+
+        <div id='join-bar'>
+          <a id='join-btn' class='btn'>
+            Join this club's mailing list
+          </a>
+        </div>
+
+        {{#if isClubAdmin}}
+          <div id='club-admin-nav-wrapper'>
+            <div id='club-admin-nav'>
+              <a href='/editClub/{{name}}' id='edit-btn'>
+                Edit
+              </a>
+              <a href='/editClub/{{name}}' id='edit-btn'>
+                Mailing List
+              </a>
+            </div>
+          </div>
+        {{/if}}
+      {{/with}}
+    {{else}}    
       {{> errorPage}}
-
-    {{else}}
-      <div id='join'>
-        <a class='btn'>Join this club's mailing list</a>
-      </div>
-      <h1>{{name}}</h1>
-
-      <div id='club-content'>
-        {{{content}}}
-
-      </div>
-      <a href='/editClub/{{name}}'>Edit</a>
-      <div class='navbar'>
-        <a href="/categories/{{category}}">
-          <i class='icon-chevron-up'></i> {{category}}
-        </a>
-      </div>
-    {{/if}}
-  {{/with}}
+    {{/if}} 
+  {{/with}}   
 
 </template>

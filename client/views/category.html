@@ -1,0 +1,21 @@
+<template name='category'>
+{{#if categoryName}}
+  <h1>{{categoryName}}</h1>
+{{else}}
+  <h1>Invalid Category</h1>
+{{/if}}
+
+<ul id='clubs'>
+  {{#each clubs}}
+    <li>
+      <a href='/clubId/{{_id}}'>{{name}}</a>
+      <ul>
+        <li>{{desc}}</li>
+      </ul>
+    </li>
+  {{/each}}
+</ul>
+
+<a href="/createClub" class='btn'>Create a Club Fest page for your club</a>
+
+</template>

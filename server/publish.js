@@ -5,3 +5,4 @@ Meteor.publish('allClubs', function(){
 Meteor.publish('allCategories', function(){
   return Categories.find();
 });
+

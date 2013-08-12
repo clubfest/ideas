@@ -3,12 +3,8 @@
 </head>
 
 <body>
-  <div class='float-right'>
-    {{loginButtons}}
+  {{> navbar}}
+  <div id='body-wrapper'>
+    {{renderPage}}
   </div>
-  <div class='clear-float'></div>
-
-  {{renderPage}}
 </body>
-
-

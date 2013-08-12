@@ -3,11 +3,12 @@
   <ul id='clubs'>
   {{#each getClubs}}
     <li>
-      <a href='/clubs/{{name}}'>{{name}}</a>
+      <a href='/clubId/{{_id}}'>{{name}}</a>
       <ul>
         <li>{{desc}}</li>
       </ul>
     </li>
   {{/each}}
   </ul>
+  <a href="/createClub" class='btn'>Create a Club Fest page for your club</a>
 </template>
