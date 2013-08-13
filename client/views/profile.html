@@ -1,0 +1,25 @@
+<template name='profile'>
+<h2>My Profile</h2>
+{{#with currentUser}}
+  <h3>Club Admin</h3>
+  <ul>
+    {{#each clubAdminRoles}}
+      <li>
+        <a class='unjoin-btn btn' data-id={{_id}}>Resign</a>
+        <a href="/clubId/{{_id}}">{{name}}</a>
+      </li>
+    {{/each}}
+  </ul>
+  <h3>Mailing Lists</h3>
+  <ul>
+    {{#each clubMemberRoles}}
+      <li>
+        <a class='unjoin-btn btn' data-id={{_id}}>Unjoin</a>
+        <a href="/clubId/{{_id}}">{{name}}</a>
+
+      </li>
+    {{/each}}
+  </ul>
+      
+{{/with}}
+</template>

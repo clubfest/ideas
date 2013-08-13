@@ -21,6 +21,9 @@ Meteor.Router.add({
     Session.set('routedClubId', id);
     return 'editClub'
   },
+  '/profile': function(){
+    return 'profile'
+  },
   // '/categories': function(){
   //   return 'home';
   // },
