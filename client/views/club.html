@@ -14,9 +14,15 @@
         </div>
 
         <div id='join-bar'>
-          <a id='join-btn' class='btn'>
-            Join this club's mailing list
-          </a>
+          {{#if isMember}}
+            <a id='unjoin-btn' class='btn'>
+              Unjoin mailing list
+            </a>
+          {{else}}
+            <a id='join-btn' class='btn btn-primary'>
+              Join this club's mailing list
+            </a>
+          {{/if}}
         </div>
 
         {{#if isClubAdmin}}

@@ -9,10 +9,13 @@ Template.createClub.events({
       var newClub = tmplToClubObj(tmpl);
       Meteor.call('addInfoToClubAndInsert', newClub,
         function(err, newClubId){
-          if (err) {alert(err.reason);}
+          if (err) {alert('addInfoToClubAndInsert---'+err.reason);}
           else {
-            Meteor.call("addClubToAdminRoles", newClubId);
-            routeToClub(newClubId);
+            Meteor.call("addClubToAdminRoles", newClubId,
+              function(err, resultId){
+                if (err) {alert("addClubToAdminRoles---"+err)}
+                else {routeToClub(resultId);}
+            });
           }
         }
       )

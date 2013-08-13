@@ -5,3 +5,8 @@
 #clubs > li {
   padding: 5px;
 }
+
+#clubs a{
+  font-weight: bold;
+  font-size: 18px;
+}

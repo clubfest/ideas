@@ -1,3 +1,5 @@
+Clubs = new Meteor.Collection('Clubs')
+
 Meteor.methods({
   addInfoToClubAndInsert: function(club){
     checkSignedIn();
@@ -17,13 +19,22 @@ Meteor.methods({
     return Clubs.update(club._id, {
       $set: {content: newContent}
     });
+  },
+  addUserEmailToMemberEmails: function(email, clubId){
+    Clubs.update(clubId, {
+      $addToSet: {memberEmails: email}
+    });
+  },
+  removeUserEmailFromMemberEmails: function(email, clubId){
+    Clubs.update(clubId, {
+      $pull: {memberEmails: email}
+    });
   }
 })
 
 
 function checkClubFields(club){
   // prevent mongo attack
-  console.log(club)
   check(club.name, String);
   check(club.desc, String);
   check(club.categoryId, String);

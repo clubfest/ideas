@@ -10,12 +10,16 @@
   list-style: none;
 }
 
-#nav {
+#right-nav {
   float: right;
   margin-right: 50px;
   margin-top: 20px;
 }
-
+#left-nav {
+  float: left;
+  margin-left: 50px;
+  margin-top: 20px;
+}
 #nav-wrapper {
   clear: both;
 }
