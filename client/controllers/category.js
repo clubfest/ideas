@@ -2,7 +2,7 @@ Template.category.clubs = function(){
   var category = Categories.findOne(
     Session.get('routedCategoryId'));
   if (category == null){
-    return Clubs.find({}).fetch().sort(caseInsensitiveSort);
+    return Clubs.find({}).fetch().sort(caseInsensitiveNameSort);
   } else {
     return Clubs.find({categoryId: category._id}).fetch().sort(caseInsensitiveSort);
   }

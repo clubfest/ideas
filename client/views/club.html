@@ -16,10 +16,12 @@
         <div id='join-bar'>
           {{#if isMember}}
             <a id='unjoin-btn' class='btn'>
+              <i class='icon-remove-sign'></i>
               Unjoin mailing list
             </a>
           {{else}}
             <a id='join-btn' class='btn btn-primary'>
+              <i class='icon-star'></i>
               Join this club's mailing list
             </a>
           {{/if}}
@@ -28,10 +30,10 @@
         {{#if isClubAdmin}}
           <div id='club-admin-nav-wrapper'>
             <div id='club-admin-nav'>
-              <a href='/editClub/{{name}}' id='edit-btn'>
+              <a href='/edit/clubId/{{_id}}' id='edit-btn'>
                 Edit
               </a>
-              <a href='/editClub/{{name}}' id='edit-btn'>
+              <a href='/mailingList/{{_id}}'>
                 Mailing List
               </a>
             </div>

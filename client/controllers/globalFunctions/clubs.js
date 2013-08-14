@@ -1,4 +1,4 @@
-this.caseInsensitiveSort = function(a,b) {
+this.caseInsensitiveNameSort = function(a,b) {
   if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
   if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
   return 0;
@@ -30,4 +30,10 @@ this.clubNameToId = function(clubName, exact){
   } else {
     return null
   }
+}
+
+this.caseInsensitiveSort = function(a,b) {
+  if (a.toLowerCase() < b.toLowerCase()) return -1;
+  if (a.toLowerCase() > b.toLowerCase()) return 1;
+  return 0;
 }

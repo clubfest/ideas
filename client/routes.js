@@ -6,24 +6,28 @@ Meteor.Router.add({
     Session.set('routedCategoryId', id);
     return 'category';
   },
-  '/clubs': function(){
+  '/allClubs': function(){
     return 'allClubs';
   },
   '/clubId/:id': function(id){
     Session.set('routedClubId', id);
     return 'club'
   },
-  '/editClub/:name': function(name){
-    Session.set('routedClubName', name)
-    return 'editClub';
-  },
   '/edit/clubId/:id': function(id){
     Session.set('routedClubId', id);
-    return 'editClub'
+    return 'editClub';
   },
   '/profile': function(){
     return 'profile'
   },
+  '/mailingList/:id': function(id){
+    Session.set('routedClubId', id);
+    return 'mailingList';
+  },
+  //   '/editClub/:name': function(name){
+  //   Session.set('routedClubName', name)
+  //   return 'editClub';
+  // },
   // '/categories': function(){
   //   return 'home';
   // },

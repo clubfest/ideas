@@ -1,2 +1,9 @@
-.unjoin-btn{
+.joined-table td{
+  padding: 10px;
+}
+
+.unjoin-btn {
+  margin-left: 20px;
+  padding: 10px;
+  cursor: pointer;
 }

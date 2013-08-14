@@ -1,26 +1,7 @@
-// Hooks.onCreateUser = function(userId){
-//   Meteor.users.update(userId,{
-//     $set: {clubAdminRoles: [], clubIds: []}});
-// }
-
-
-
-// Only for testing purposes
-// Meteor.methods({
-//   createUser: function(userInfo){
-//     var user = {
-//       name: userInfo.name,
-//       email: userInfo.email,
-//       password: userInfo.password,
-//     };
-//     return Meteor.users.insert(user);
-//   }
-// })
 
 Meteor.methods({
-  addClubToMemberRoles: function(clubId){
+  addClubToMemberRoles: function(clubId, userId){
     var club = Clubs.findOne(clubId);
-    var userId = Meteor.userId();
     Meteor.users.update(userId, {
       $addToSet: {
         clubMemberRoles: {
@@ -30,8 +11,7 @@ Meteor.methods({
       }
     });
   },
-  removeClubFromMemberRoles: function(clubId){
-    var userId = Meteor.userId();
+  removeClubFromMemberRoles: function(clubId, userId){
     Meteor.users.update(userId, {
       $pull: {
         clubMemberRoles: {
@@ -40,10 +20,9 @@ Meteor.methods({
       }
     });
   },
-  addClubToAdminRoles: function(clubId){
+  addClubToAdminRoles: function(clubId, userId){
     var club = Clubs.findOne(clubId);
-    var user = Meteor.user();
-    Meteor.users.update(user, {
+    Meteor.users.update(userId, {
       $addToSet: {
         clubAdminRoles: {
           _id: club._id, 
@@ -53,18 +32,41 @@ Meteor.methods({
     });
     return clubId;
   },
-  removeClubFromAdminRoles: function(clubId){
-    var userId = Meteor.userId();
+  removeClubFromAdminRoles: function(clubId, userId){
     var club = Clubs.findOne(clubId);
-    if (club.clubAdminRoles.length < 2){
+    if (user.clubAdminRoles.length < 2){
       throw Meteor.Error(413, "Your club must have at least 1 admin.");
     }
-    Meteor.users.update(userId, {
+    Meteor.users.update(user, {
       $pull: {
         clubAdminRoles: {
           _id: clubId
         }
       }
     });
-  } 
+  },
+  findUserByEmail: function(email){
+    var user = Meteor.users.findOne({
+      "services.google.email": {
+        $regex: new RegExp(email, 'i')
+      }
+    });
+    if (user){
+      return user._id
+    } else {
+      return null;
+    }
+  },
+  // isClubAdmin: function(clubId){
+  //   var adminRoles = Meteor.user().clubAdminRoles;
+  //   if (adminRoles){
+  //     for (var i=0; i<adminRoles.length; i++){
+  //       if (adminRoles[i]._id===clubId) {
+  //         return true;
+  //       } 
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // }
 });

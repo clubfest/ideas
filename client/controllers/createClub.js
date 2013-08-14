@@ -11,7 +11,8 @@ Template.createClub.events({
         function(err, newClubId){
           if (err) {alert('addInfoToClubAndInsert---'+err.reason);}
           else {
-            Meteor.call("addClubToAdminRoles", newClubId,
+            Meteor.call("addClubToAdminRoles",
+              newClubId, Meteor.userId(),
               function(err, resultId){
                 if (err) {alert("addClubToAdminRoles---"+err)}
                 else {routeToClub(resultId);}

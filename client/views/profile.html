@@ -1,25 +1,46 @@
 <template name='profile'>
 <h2>My Profile</h2>
 {{#with currentUser}}
-  <h3>Club Admin</h3>
-  <ul>
-    {{#each clubAdminRoles}}
-      <li>
-        <a class='unjoin-btn btn' data-id={{_id}}>Resign</a>
-        <a href="/clubId/{{_id}}">{{name}}</a>
-      </li>
-    {{/each}}
-  </ul>
-  <h3>Mailing Lists</h3>
-  <ul>
-    {{#each clubMemberRoles}}
-      <li>
-        <a class='unjoin-btn btn' data-id={{_id}}>Unjoin</a>
-        <a href="/clubId/{{_id}}">{{name}}</a>
+  {{#if clubMemberRoles}}
+    <h3>Mailing Lists</h3>
+    <ul>
+    <table class='joined-table'>
+      {{#each clubMemberRoles}}
+      <tr>
+        <td>
+          <a href="/clubId/{{_id}}">{{name}}</a>
+        </td>
+        <td>
+          <a class='unjoin-btn unjoin-member-btn' data-id={{_id}}>
+            <i class='icon-remove'></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  {{else}}
+  <p>
+    You are not on any mailing list currently. 
+    <a href='/allClubs'>Go join some clubs.</a>
+  </p>   
+  {{/if}}
 
-      </li>
-    {{/each}}
-  </ul>
-      
+  {{#if clubAdminRoles}}
+    <h3>Club Admin</h3>
+    <table class='joined-table'>
+      {{#each clubAdminRoles}}
+      <tr>
+        <td>
+          <a href="/clubId/{{_id}}">{{name}}</a>
+        </td>
+        <td>
+          <a class='unjoin-btn unjoin-admin-btn' data-id={{_id}}>
+            <i class='icon-remove'></i>
+          </a>
+        </td>
+      </tr>
+      {{/each}}
+    </table>
+  {{/if}}  
 {{/with}}
 </template>

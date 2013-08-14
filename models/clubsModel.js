@@ -10,17 +10,14 @@ Meteor.methods({
     club.adminEmails = [Meteor.user().services.google.email];
     return Clubs.insert(club);
   },
-  updateClubContent: function(club, newContent){
+  updateClubContent: function(clubId, newContent){
     checkSignedIn();
-    // checkAuthorization(club);
-    checkClubFields(club, String);
-    checkDuplicateName(club.name);
-
-    return Clubs.update(club._id, {
-      $set: {content: newContent}
-    });
+    checkAdmin(clubId);
+    return Clubs.update(clubId, {$set: {content: newContent}});
   },
   addUserEmailToMemberEmails: function(email, clubId){
+    check(email, String);
+    // checkAdmin(clubId);
     Clubs.update(clubId, {
       $addToSet: {memberEmails: email}
     });
@@ -28,6 +25,16 @@ Meteor.methods({
   removeUserEmailFromMemberEmails: function(email, clubId){
     Clubs.update(clubId, {
       $pull: {memberEmails: email}
+    });
+  },
+  addUserEmailToadminEmails: function(email, clubId){
+    Clubs.update(clubId, {
+      $addToSet: {adminEmails: email}
+    });
+  },
+  removeUserEmailFromAdminEmails: function(email, clubId){
+    Clubs.update(clubId, {
+      $pull: {adminEmails: email}
     });
   }
 })
@@ -60,9 +67,9 @@ function checkSignedIn(){
   }
 }
 
-function checkAuthorization(club){
-  if (Meteor.user==-1){
-    throw new Meteor.Error(413, "Please ask the club's admin for permission to edit.");
+function checkAdmin(clubId){
+  if (!isClubAdmin(clubId)){
+    throw new Meteor.Error(413, "Only admin can edit.");
   }
 }
 function checkDuplicateName(title){

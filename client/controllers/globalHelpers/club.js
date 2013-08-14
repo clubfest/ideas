@@ -1,27 +1,20 @@
+
 // Used for club.html and editClub.html
-Handlebars.registerHelper('currClub', function(){
-  var club = clubNameToObject(Session.get('routedClubName'));
-  if (club==null){
-    return {err: true, msg: 'Invalid club name'}
-  } else {
-    return club;
-  }
-});
-
-// Used for editClub.html
 Handlebars.registerHelper('isClubAdmin', function(){
-  var clubId = clubNameToId(Session.get('routedClubName'));
-  var user = Meteor.user()
-  if (user){
-    if (isClubAdmin(user, clubId)){
-      return true;
-    }
-  } else {
-    return false;
-  }
+  var clubId = Session.get('routedClubId');
+  return isClubAdmin(clubId);
 });
 
 
+// Used for club.html and editClub.html
+// Handlebars.registerHelper('currClub', function(){
+//   var club = clubNameToObject(Session.get('routedClubName'));
+//   if (club==null){
+//     return {err: true, msg: 'Invalid club name'}
+//   } else {
+//     return club;
+//   }
+// });
 
 // Handlebars.registerHelper('currCategory', function(){
 //   var category = categoryNameToObject(Session.get('routedCategoryName'));

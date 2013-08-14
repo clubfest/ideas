@@ -10,7 +10,7 @@ Template.club.events = {
           if (err) {alert(err);}
       });
       Meteor.call('addClubToMemberRoles', 
-        Session.get('routedClubId'), 
+        Session.get('routedClubId'), Meteor.userId(),
         function(err,result){
           if (err) { alert(err);}
       });
@@ -25,14 +25,14 @@ Template.club.events = {
           if (err){ alert(err); }
       });
       Meteor.call('removeClubFromMemberRoles',
-        Session.get('routedClubId'),
+        Session.get('routedClubId'), Meteor.userId(),
         function(err, result){
           if(err) { alert(err); }
       });
     });
   },
   'click #edit-btn': function(evt){
-    evt.preventDefault();
+    // evt.preventDefault();
   }
 }
 

@@ -1,4 +1,4 @@
 Template.allClubs.getClubs = function(){
   // very tolerant, may retrieve more than you want
-  return Clubs.find({}).fetch().sort(caseInsensitiveSort);
+  return Clubs.find({}).fetch().sort(caseInsensitiveNameSort);
 }
