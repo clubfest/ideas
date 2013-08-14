@@ -24,6 +24,9 @@ Meteor.Router.add({
     Session.set('routedClubId', id);
     return 'mailingList';
   },
+  '/sync': function(){
+    return 'sync';
+  },
   //   '/editClub/:name': function(name){
   //   Session.set('routedClubName', name)
   //   return 'editClub';

@@ -33,16 +33,18 @@ Template.mailingList.events = {
           alert(err.reason);
         } else {
           if (!result){
-            // Meteor.call('addClubToTempUserMemberRole', 
-            //   clubId, email);
-            // // if new temp user
-            // Meteor.call('sendEmailToTempUser', email)
-            // alert('To be implemented: send email will be sent for you to join.');
+            Meteor.call('addClubToTempMemberRole', clubId, email,
+              function(){
+                if (err) {alert(err.reason);}
+            });
             Meteor.call('sendEmail', email, 'club.fest.on.meteor@gmail.com', 'Joining Club.Fest.on.Meteor.com',
               'You have been added to the mailing list of some clubs.\n\n\
-              To control more seamlessly which mailing lists you are on,\n\
+              To control which mailing lists you want to be on,\n\
               sign in with your current email at http://club.fest.on.meteor.com/\n\
-              and go to the profile page.')
+              and go to the profile page.',
+              function(){
+                if (err) {alert(err.reason);}
+            });
           } else {
             Meteor.call('addClubToMemberRoles',
               clubId, result,
