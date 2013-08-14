@@ -1,35 +1,44 @@
 TempUsers = new Meteor.Collection('TempUsers')
 
 Meteor.methods({
-  addClubToTempMemberRole: function(clubId, email){
-    var club = Clubs.findOne(clubId);
-    var user = TempUsers.findOne({email: email});
-    if (user){
-      TempUsers.update(user._id, {
-        $addToSet: {clubMemberRoles: {
-          _id: club._id,
-          name: club.name
-        }}
-      });
+  findTempUserByEmail: function(email){
+    var user = TempUsers.findOne({email: {$regex: new RegExp(email, 'i')}});
+    if (user) {
+      return user._id;
     } else {
-      TempUsers.insert({
-        email: email,
-        clubMemberRoles:[{
-          _id: club._id,
-          name: club.name
-        }]
-      })
+      return null;
     }
   },
-  findTempUserByEmail: function(email){
-    return TempUsers.findOne({email: email})
+  createTempUser: function(email){
+    return TempUsers.insert({email: email});
+  },
+  addClubToTempMemberRoles: function(clubId, userId){
+    var club = Clubs.findOne(clubId);
+    TempUsers.update(userId, {
+      $addToSet: {clubMemberRoles: {
+        _id: club._id,
+        name: club.name
+      }}
+    });
+  },
+  addClubToTempAdminRoles: function(clubId, userId){
+    var club = Clubs.findOne(clubId);
+    TempUsers.update(userId, {
+      $addToSet: {clubAdminRoles: {
+        _id: club._id,
+        name: club.name
+      }}
+    });
   },
   syncTempUserToUser: function(userEmail, userId){
-    var tempUser = TempUsers.findOne({email: userEmail});
+    var tempUser = TempUsers.findOne({email: {$regex: new RegExp(email, 'i')}});
     var roles = tempUser.clubMemberRoles;
-    console.log('---', roles);
+    var adminRoles = tempUser.clubAdminRoles;
     Meteor.users.update(userId, {
       $addToSet: {clubMemberRoles: {$each: roles}}
+    });
+    Meteor.users.update(userId, {
+      $addToSet: {clubAdminRoles: {$each: adminRoles}}
     }); 
     Meteor.users.remove({email: userEmail});
   }

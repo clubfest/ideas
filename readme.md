@@ -1,6 +1,8 @@
 
 ## TODO
 
+Add buttons to remove icon
+
 Security: addRole need to be restricted to admin of club or if it's the current user
 
 Security: publish restricted club, as it contains emails

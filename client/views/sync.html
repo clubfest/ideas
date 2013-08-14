@@ -1,8 +1,11 @@
 <template name='sync'>
-<ul>
+<h2>Syncing your account with mailing lists you joined before</h2>
+<p>
   Here are the clubs whose mailing list you now belong to:
+</p>
+<ul>
   {{#each clubs}}
-    <li>{{name}}</li>
+    <li><a href="/clubId/{{_id}}"></a>{{name}}</li>
   {{/each}}
 </ul>
 

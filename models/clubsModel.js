@@ -27,7 +27,7 @@ Meteor.methods({
       $pull: {memberEmails: email}
     });
   },
-  addUserEmailToadminEmails: function(email, clubId){
+  addUserEmailToAdminEmails: function(email, clubId){
     Clubs.update(clubId, {
       $addToSet: {adminEmails: email}
     });
