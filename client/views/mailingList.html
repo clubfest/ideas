@@ -2,39 +2,45 @@
 {{#if isClubAdmin}}
   {{#with club}}
     <h2>{{name}}</h2>
-
-    
     <h3>Mailing List</h3>
-    <table>
-      {{#each memberEmails}}
-
-        <tr>
-          <td class='email'>{{this}}</td>
-          <td title='remove email'><button class='remove-btn' data-email='{{this}}'><i class='icon-remove'></i></button></td>
-        </tr>
-      {{/each}}
-    </table>
     <form>
       <input type='text' id='member-email-input' placeholder='Add Email (cmail or gmail)'/>
       <input type='submit' id='member-email-submit'/>  
     </form>
-
-    {{#if showAdmin}}
-      <h3>Admin</h3>
-      {{#each adminEmails}}
-        <table>
-          <tr>
-            <td>{{this}}</td>
-          </tr>
-        </table>
+    <table>
+      {{#each memberEmails}}
+        <tr>
+          <td class='email'>{{this}}</td>
+          <td title='remove email' style="{{removeStyle}}">
+            <button class='remove-btn' data-email='{{this}}'>
+              <i class='icon-remove'></i>
+            </button>
+          </td>
+        </tr>
       {{/each}}
-      <form>
-        <input type='text' id='admin-email-input' placeholder='Add email to admin list'/>
-        <input type='submit' id='admin-email-submit'/>  
-      </form>
-    {{/if}}
+    </table>
+    
 
-  {{/with }}
+    <h3>Admin</h3>
+    <form>
+      <input type='text' id='admin-email-input' placeholder='Add email to admin list'/>
+      <input type='submit' id='admin-email-submit'/>  
+    </form>
+    {{#each adminEmails}}
+      <table>
+        <tr>
+          <td>{{this}}</td>
+          <td title='remove email' style="{{removeStyle}}">
+            <button class='remove-btn' data-email='{{this}}'>
+              <i class='icon-remove'></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    {{/each}}
+    
+  <a id='remove-style-toggle' class='btn'>Edit email</a>
+  {{/with}}
 {{else}}
 
 {{/if}}

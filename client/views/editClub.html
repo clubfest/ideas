@@ -1,9 +1,13 @@
 <template name='editClub'>
-{{#with getClub}}
-  <h2>{{name}}</h2>
-  <textarea id='content'>{{{content}}}</textarea>
-  <br/>
-  <a id='save-content' class='btn-primary btn' href='/clubId/{{_id}}'>Save</a>
-{{/with}}
+{{#if isClubAdmin}}
+  {{#with getClub}}
+    <h2>{{name}}</h2>
+    <textarea id='content'>{{{content}}}</textarea>
+    <br/>
+    <a id='save-content' class='btn-primary btn' href='/clubId/{{_id}}'>Save</a>
+    {{> clubAdminNavbar}}
+
+  {{/with}}
+{{/if}}
 
 </template>

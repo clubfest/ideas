@@ -30,9 +30,6 @@ Template.club.events = {
           if(err) { alert(err); }
       });
     });
-  },
-  'click #edit-btn': function(evt){
-    // evt.preventDefault();
   }
 }
 

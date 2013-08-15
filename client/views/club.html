@@ -28,16 +28,7 @@
         </div>
 
         {{#if isClubAdmin}}
-          <div id='club-admin-nav-wrapper'>
-            <div id='club-admin-nav'>
-              <a href='/edit/clubId/{{_id}}' id='edit-btn'>
-                Edit
-              </a>
-              <a href='/mailingList/{{_id}}'>
-                Mailing List
-              </a>
-            </div>
-          </div>
+          {{> clubAdminNavbar}}
         {{/if}}
       {{/with}}
     {{else}}    

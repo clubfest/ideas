@@ -1,3 +1,7 @@
 .email {
   cursor: pointer;
 }
+
+#remove-style-toggle {
+  margin: 20px;
+}

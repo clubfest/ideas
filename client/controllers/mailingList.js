@@ -8,6 +8,11 @@ Template.mailingList.club = function(){
   }
 }
 
+Template.mailingList.removeStyle = function(){
+  return Session.get("removeStyle");
+}
+
+
 var welcome_email = '\
   You have been added to the mailing list of some clubs.\n\n\
   To control which mailing lists you want to be on,\n\
@@ -18,6 +23,14 @@ Template.mailingList.showAdmin = function(){
 }
 
 Template.mailingList.events = {
+  'click #remove-style-toggle': function(){
+    console.log(Session.get('removeStyle'))
+    if (Session.get('removeStyle')=='display: none;'){
+      Session.set('removeStyle', '');
+    } else {
+      Session.set('removeStyle', 'display: none;');
+    }
+  },
   'click #member-email-submit': function(evt, tmpl){
     evt.preventDefault();
     var clubId = Session.get('routedClubId')
