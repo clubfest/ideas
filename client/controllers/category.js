@@ -4,7 +4,7 @@ Template.category.clubs = function(){
   if (category == null){
     return Clubs.find({}).fetch().sort(caseInsensitiveNameSort);
   } else {
-    return Clubs.find({categoryId: category._id}).fetch().sort(caseInsensitiveSort);
+    return Clubs.find({categoryId: category._id}).fetch().sort(caseInsensitiveNameSort);
   }
 }
 

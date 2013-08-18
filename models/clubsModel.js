@@ -19,22 +19,22 @@ Meteor.methods({
     check(email, String);
     // checkAdmin(clubId);
     Clubs.update(clubId, {
-      $addToSet: {memberEmails: email}
+      $addToSet: {memberEmails: {address: email, createdOn: new Date().getTime()}}
     });
   },
   removeUserEmailFromMemberEmails: function(email, clubId){
     Clubs.update(clubId, {
-      $pull: {memberEmails: email}
+      $pull: {memberEmails: {address: email}}
     });
   },
   addUserEmailToAdminEmails: function(email, clubId){
     Clubs.update(clubId, {
-      $addToSet: {adminEmails: email}
+      $addToSet: {adminEmails: {address: email, createdOn: new Date().getTime()}}
     });
   },
   removeUserEmailFromAdminEmails: function(email, clubId){
     Clubs.update(clubId, {
-      $pull: {adminEmails: email}
+      $pull: {adminEmails: {address: email}}
     });
   }
 })

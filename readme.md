@@ -1,6 +1,7 @@
 
 ## TODO
 
+Refactor navbar's use of Session
 Separate concerns: add an edit page for the mailing list, so that things there can be editted, and then add a clean mailing list where you send messages
 
 Make the page a single page app (on the same level).

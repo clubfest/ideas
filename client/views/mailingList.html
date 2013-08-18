@@ -10,7 +10,7 @@
     <table>
       {{#each memberEmails}}
         <tr>
-          <td class='email'>{{this}}</td>
+          <td class='email'>{{this.address}}</td>
           <td title='remove email' style="{{removeStyle}}">
             <button class='remove-btn' data-email='{{this}}'>
               <i class='icon-remove'></i>
@@ -29,7 +29,7 @@
     {{#each adminEmails}}
       <table>
         <tr>
-          <td>{{this}}</td>
+          <td>{{this.address}}</td>
           <td title='remove email' style="{{removeStyle}}">
             <button class='remove-btn' data-email='{{this}}'>
               <i class='icon-remove'></i>
@@ -39,7 +39,14 @@
       </table>
     {{/each}}
     
-  <a id='remove-style-toggle' class='btn'>Edit email</a>
+  <a id='remove-style-toggle' class='btn'>
+    <i class='icon-pencil'></i>
+    Clean email
+  </a>
+  <a id='sort-toggle' class='btn'>
+    <i class='icon-list'></i>
+    Sort
+  </a>
   {{/with}}
 {{else}}
 

@@ -27,6 +27,10 @@ Meteor.Router.add({
   '/sync': function(){
     return 'sync';
   },
+  '/sendMessage/:id': function(id){
+    Session.set('routedClubId', id);
+    return 'sendMessage';
+  },
   //   '/editClub/:name': function(name){
   //   Session.set('routedClubName', name)
   //   return 'editClub';

@@ -1,11 +1,35 @@
+Template.mailingList.created = function(){
+  Session.set('removeStyle', 'display: none;');
+  Session.set('sortByDate', true);
+}
+
 Template.mailingList.club = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));
-  return {
-    name: club.name,
-    _id: club._id,
-    memberEmails: club.memberEmails.sort(caseInsensitiveSort),
-    adminEmails: club.adminEmails.sort(caseInsensitiveSort)
+  if (Session.get('sortByDate')){
+    return {
+      name: club.name,
+      _id: club._id,
+      memberEmails: club.memberEmails.sort(createdOnReverseSort),
+      adminEmails: club.adminEmails.sort(createdOnReverseSort)
+    }
+  } else {
+    return {
+      name: club.name,
+      _id: club._id,
+      memberEmails: club.memberEmails.sort(addressCaseInsensitiveSort),
+      adminEmails: club.adminEmails.sort(addressCaseInsensitiveSort)
+    }
   }
+}
+
+var createdOnReverseSort = function(a,b){
+  return a.createdOn < b.createdOn;
+}
+
+var addressCaseInsensitiveSort = function(a,b){
+  if (a.address.toLowerCase() < b.address.toLowerCase()) return -1;
+  if (a.address.toLowerCase() > b.address.toLowerCase()) return 1;
+  return 0;
 }
 
 Template.mailingList.removeStyle = function(){
@@ -14,8 +38,8 @@ Template.mailingList.removeStyle = function(){
 
 
 var welcome_email = '\
-  You have been added to the mailing list of some clubs.\n\n\
-  To control which mailing lists you want to be on,\n\
+  You have been added to some mailing lists in Club.Fest.on.Meteor\n\n\
+  If you are a first time user,\n\
   visit http://club.fest.on.meteor.com/sync'
 
 Template.mailingList.showAdmin = function(){
@@ -24,12 +48,14 @@ Template.mailingList.showAdmin = function(){
 
 Template.mailingList.events = {
   'click #remove-style-toggle': function(){
-    console.log(Session.get('removeStyle'))
     if (Session.get('removeStyle')=='display: none;'){
       Session.set('removeStyle', '');
     } else {
       Session.set('removeStyle', 'display: none;');
     }
+  },
+  'click #sort-toggle': function(){
+    Session.set('sortByDate', !Session.get('sortByDate'));
   },
   'click #member-email-submit': function(evt, tmpl){
     evt.preventDefault();
