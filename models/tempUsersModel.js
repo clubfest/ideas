@@ -30,17 +30,22 @@ Meteor.methods({
       }}
     });
   },
-  syncTempUserToUser: function(userEmail, userId){
-    var tempUser = TempUsers.findOne({email: {$regex: new RegExp(email, 'i')}});
+  syncTempUserToUser: function(){
+    var user = Meteor.user();
+    var email = user.services.google.email;
+    var tempUser = TempUsers.findOne({"email": {$regex: new RegExp(email, 'i')}});
+    if (!tempUser){
+      throw new Meteor.Error(413, 'You do not have any to sync');
+    }
     var roles = tempUser.clubMemberRoles;
     var adminRoles = tempUser.clubAdminRoles;
-    Meteor.users.update(userId, {
+    Meteor.users.update(user._id, {
       $addToSet: {clubMemberRoles: {$each: roles}}
     });
-    Meteor.users.update(userId, {
+    Meteor.users.update(user._id, {
       $addToSet: {clubAdminRoles: {$each: adminRoles}}
     }); 
-    Meteor.users.remove({email: userEmail});
+    TempUsers.remove({email: email});
   }
 })
 

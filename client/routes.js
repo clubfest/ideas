@@ -31,6 +31,7 @@ Meteor.Router.add({
     Session.set('routedClubId', id);
     return 'sendMessage';
   },
+  '/feedback': 'feedback',
   //   '/editClub/:name': function(name){
   //   Session.set('routedClubName', name)
   //   return 'editClub';

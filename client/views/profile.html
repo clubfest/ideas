@@ -3,18 +3,19 @@
 {{#with currentUser}}
   {{#if clubMemberRoles}}
     <h3>Mailing Lists</h3>
-    <ul>
     <table class='joined-table'>
       {{#each clubMemberRoles}}
       <tr>
         <td>
           <a href="/clubId/{{_id}}">{{name}}</a>
         </td>
-        <td>
-          <a class='unjoin-btn unjoin-member-btn' data-id={{_id}}>
-            <i class='icon-remove'></i>
-          </a>
-        </td>
+        {{#if editMode}}
+          <td>
+            <a class='unjoin-btn unjoin-member-btn' data-id={{_id}}>
+              <i class='icon-remove'></i>
+            </a>
+          </td>
+        {{/if}}
       </tr>
       {{/each}}
     </table>
@@ -33,14 +34,20 @@
         <td>
           <a href="/clubId/{{_id}}">{{name}}</a>
         </td>
-        <td>
-          <a class='unjoin-btn unjoin-admin-btn' data-id={{_id}}>
-            <i class='icon-remove'></i>
-          </a>
-        </td>
+        {{#if editMode}}
+          <td>
+            <a class='unjoin-btn unjoin-admin-btn' data-id={{_id}}>
+              <i class='icon-remove'></i>
+            </a>
+          </td>
+        {{/if}}
       </tr>
       {{/each}}
     </table>
   {{/if}}  
 {{/with}}
+<div style='float: right;'>
+  <a class='btn' id='edit-toggle'>Edit</a>
+  <a class='btn' id='feedback-button' href='/feedback'>Feedback</a>  
+</div>
 </template>

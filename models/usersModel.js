@@ -33,10 +33,6 @@ Meteor.methods({
     return clubId;
   },
   removeClubFromAdminRoles: function(clubId, userId){
-    var club = Clubs.findOne(clubId);
-    if (user.clubAdminRoles.length < 2){
-      throw Meteor.Error(413, "Your club must have at least 1 admin.");
-    }
     Meteor.users.update(user, {
       $pull: {
         clubAdminRoles: {

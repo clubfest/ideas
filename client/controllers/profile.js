@@ -1,4 +1,17 @@
+Template.profile.created = function(){
+  Session.set('profileEditMode', false);
+}
+
+Template.profile.editMode = function(){
+  return Session.get('profileEditMode');
+}
+
 Template.profile.events = {
+  'click #edit-toggle': function(evt){
+    Session.set('profileEditMode', 
+      !Session.get('profileEditMode')
+    );
+  },
   'click .unjoin-member-btn': function(evt){
     afterSignIn(function(){
       var email = Meteor.user().services.google.email;

@@ -1,6 +1,8 @@
 
 ## TODO
 
+Remove userId for all the Meteor.methods for better security
+
 Refactor navbar's use of Session
 Separate concerns: add an edit page for the mailing list, so that things there can be editted, and then add a clean mailing list where you send messages
 

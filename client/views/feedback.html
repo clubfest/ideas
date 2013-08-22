@@ -1,0 +1,12 @@
+<template name='feedback'>
+<textarea id='feedback-textarea' placeholder='Enter your comment or email club.fest.on.meteor@gmail.com'></textarea>
+<a class='btn' id='submit-btn'>Submit</a>
+<ul>
+  {{#each feedbacks}}
+    <li>
+      {{content}}
+    </li>
+  {{/each}}
+</ul>
+  
+</template>

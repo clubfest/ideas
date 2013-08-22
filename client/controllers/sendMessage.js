@@ -8,12 +8,19 @@ Template.sendMessage.events = {
     var receivers = _.map(Clubs.findOne(clubId).memberEmails, function(email){
       return email.address;
     });
-    Meteor.call('sendToMailingList', 'unknown', 'unknown', receivers, subject, content, function(err){
+    var sender = Meteor.user().services.google.email;
+    receivers.push(sender);
+    console.log(sender);
+    Meteor.call('sendToMailingList', sender, sender, receivers, subject, content, function(err){
       if (err){
         alert(err.reason);
       } else {
-        alert('sent');
+        Meteor.Router.to('/clubId/'+Session.get('routedClubId'));
       }
     })
   }
+}
+
+Template.sendMessage.club = function(){
+  return Clubs.findOne(Session.get('routedClubId'))
 }

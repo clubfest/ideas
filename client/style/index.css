@@ -1,8 +1,8 @@
 #body-wrapper {
   max-width: 600px;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
-  padding: 50px;
+  padding: 5px;
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -29,4 +29,44 @@
 p {
   line-height: 150%;
   padding: 5px;
+}
+
+
+@media all and (max-width: 700px) and (min-width: 500px){
+  #left-nav {
+    margin-top: 5px;
+    margin-left: 10px;
+  }
+  #right-nav {
+    margin-right: 5px;
+    margin-top: 10px;
+    height: 25px;
+    overflow: hidden;
+  }
+  .login-display-name {
+    /*I don't know how to override display*/
+    width: 0;
+    color: white;
+  }
+}
+
+@media all and (max-width: 500px){
+  #left-nav {
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  #right-nav {
+    margin-right: 5px;
+    margin-top: 5px;
+    height: 25px;
+    overflow: hidden;
+  }
+  .login-button {
+    width: 55px;
+  }
+  .login-display-name {
+    /*I don't know how to override display*/
+    width: 0;
+    color: white;
+  }
 }

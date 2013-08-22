@@ -7,13 +7,28 @@ Meteor.methods({
     checkDuplicateName(club.name);
     club.createdOn = new Date().getTime();
     club.memberEmails = [];
-    club.adminEmails = [Meteor.user().services.google.email];
+    club.adminEmails = [{
+      address: Meteor.user().services.google.email,
+      createdOn: club.createdOn
+    }];
     return Clubs.insert(club);
   },
   updateClubContent: function(clubId, newContent){
     checkSignedIn();
     checkAdmin(clubId);
     return Clubs.update(clubId, {$set: {content: newContent}});
+  },
+  updateClubInfo: function(clubId, name, desc){
+    var club = Clubs.findOne(clubId);
+    club.name = name;
+    club.desc = desc;    
+    checkSignedIn();
+    checkAdmin(clubId);
+    checkClubFields(club);
+    return Clubs.update(clubId, {$set: {
+      name: name,
+      desc: desc
+    }});
   },
   addUserEmailToMemberEmails: function(email, clubId){
     check(email, String);
@@ -23,19 +38,41 @@ Meteor.methods({
     });
   },
   removeUserEmailFromMemberEmails: function(email, clubId){
+    // checkAdmin(clubId);
     Clubs.update(clubId, {
       $pull: {memberEmails: {address: email}}
     });
   },
   addUserEmailToAdminEmails: function(email, clubId){
+    checkAdmin(clubId);
     Clubs.update(clubId, {
       $addToSet: {adminEmails: {address: email, createdOn: new Date().getTime()}}
     });
   },
   removeUserEmailFromAdminEmails: function(email, clubId){
+    checkAdmin(clubId);
     Clubs.update(clubId, {
       $pull: {adminEmails: {address: email}}
     });
+  },
+  removeClub: function(clubId){
+    if (!isSuperUser()){
+      checkAdmin(clubId);
+    }
+    // var club = Clubs.findOne(clubId);
+    // var email;
+    // for (var i=0; i<club.adminEmails.length; i++){
+    //   email = club.adminEmails[i];
+    //   Meteor.users.findOne({
+    //     "services.google.email": {
+    //       $regex: new RegExp(email, 'i')
+    //     }
+    //   })
+    // }
+    Clubs.update(clubId, {
+      $set: {removed: true}
+    });
+    
   }
 })
 
@@ -71,6 +108,9 @@ function checkAdmin(clubId){
   if (!isClubAdmin(clubId)){
     throw new Meteor.Error(413, "Only admin can edit.");
   }
+}
+function isSuperUser(){
+  return Meteor.user().services.google.email.toLowerCase() == 'club.fest.on.meteor@gmail.com'
 }
 function checkDuplicateName(title){
   var duplicate = Clubs.findOne({name: {$regex: title, $options: 'i'}});

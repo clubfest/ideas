@@ -4,15 +4,17 @@
     <h2>{{name}}</h2>
     <h3>Mailing List</h3>
     <form>
-      <input type='text' id='member-email-input' placeholder='Add Email (cmail or gmail)'/>
-      <input type='submit' id='member-email-submit'/>  
+      <input type='email' id='member-email-input' placeholder='Add Email (gmail or cornell)'/>
+      <input type='submit' id='member-email-submit' value='Add'/>  
     </form>
     <table>
       {{#each memberEmails}}
         <tr>
-          <td class='email'>{{this.address}}</td>
+          <td class='email'>
+            {{this.address}}
+          </td>
           <td title='remove email' style="{{removeStyle}}">
-            <button class='remove-btn' data-email='{{this}}'>
+            <button class='remove-btn' data-email='{{this.address}}'>
               <i class='icon-remove'></i>
             </button>
           </td>
@@ -23,33 +25,37 @@
 
     <h3>Admin</h3>
     <form>
-      <input type='text' id='admin-email-input' placeholder='Add email to admin list'/>
-      <input type='submit' id='admin-email-submit'/>  
+      <input type='email' id='admin-email-input' placeholder='Add email to admin list'/>
+      <input type='submit' id='admin-email-submit' value='add'/>  
     </form>
     {{#each adminEmails}}
       <table>
         <tr>
           <td>{{this.address}}</td>
-          <td title='remove email' style="{{removeStyle}}">
-            <button class='remove-btn' data-email='{{this}}'>
+          <!-- <td title='remove email' style="{{removeStyle}}">
+            <button class='remove-btn' data-email='{{this.address}}'>
               <i class='icon-remove'></i>
             </button>
-          </td>
+          </td> -->
         </tr>
       </table>
     {{/each}}
     
   <a id='remove-style-toggle' class='btn'>
     <i class='icon-pencil'></i>
-    Clean email
+    Edit mode
   </a>
   <a id='sort-toggle' class='btn'>
     <i class='icon-list'></i>
     Sort
   </a>
+  {{> clubAdminNavbar}}
+
   {{/with}}
 {{else}}
 
 {{/if}}
+
+
 
 </template>

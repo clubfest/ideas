@@ -1,14 +1,27 @@
 <template name='sync'>
-<h2>Syncing your account with mailing lists you joined before</h2>
-<p>
-  Here are the clubs whose mailing list you now belong to:
-</p>
-<ul>
-  {{#each clubs}}
-    <li><a href="/clubId/{{_id}}"></a>{{name}}</li>
-  {{/each}}
-</ul>
 
-<p>Go to Home to start exploring other clubs.</p>
-<p>Go to Profile to remove mailing list.</p>
+
+<h2>Welcome to Club Fest on Meteor</h2>
+
+{{#if currentUser}}
+  <h3>
+    Mailing list you are now on
+  </h3>
+  <ul>
+    {{#each clubs}}
+      <li><a href="/clubId/{{_id}}"></a>{{name}}</li>
+    {{/each}}
+  </ul>
+  <h3>Things to do</h3>
+  <ul>
+  <li>Go to Home to start exploring other clubs.</li>
+  <li>Go to Profile to remove mailing list.</li>    
+  </ul>
+{{else}}
+  <p>
+    Synchronize your account with clubs that you have signed up for during club fest:
+  </p>
+  <a id='sync-btn' class='btn btn-primary'>Sync</a>
+
+{{/if}}
 </template>

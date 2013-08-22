@@ -1,15 +1,15 @@
 
-Template.sync.created = function(){
-  afterSignIn(function(){
-    var user =  Meteor.user();
-    var email = user.services.google.email;
-    Meteor.call('syncTempUserToUser',
-      email, user._id,
-      function(err, result){
+// Template.sync.rendered = function(){
+// }
+Template.sync.events({
+  'click #sync-btn': function(){
+    afterSignIn(function(){
+      Meteor.call('syncTempUserToUser', function(err){
         if (err){ alert(err.reason); }
+      });
     });
-  });
-};
+  }
+})
 
 Template.sync.clubs = function(){
   if (Meteor.user()){

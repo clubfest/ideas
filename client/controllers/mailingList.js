@@ -39,8 +39,7 @@ Template.mailingList.removeStyle = function(){
 
 var welcome_email = '\
   You have been added to some mailing lists in Club.Fest.on.Meteor\n\n\
-  If you are a first time user,\n\
-  visit http://club.fest.on.meteor.com/sync'
+  If you are a first time user, visit http://club.fest.on.meteor.com/sync'
 
 Template.mailingList.showAdmin = function(){
   return true;
@@ -62,13 +61,17 @@ Template.mailingList.events = {
     var clubId = Session.get('routedClubId')
     var email = tmpl.find('#member-email-input').value;
     if (email.indexOf('@')==-1){
-      alert("Not a valid email. You forgot @.");
+      alert("Yor email need an @");
       return;
     }
     Meteor.call('addUserEmailToMemberEmails',
       email, clubId,
       function(err, result){
-        if (err){ alert(err.reason+'---in addUserEmailToMemberEmails'); }
+        if (err){ 
+          alert(err.reason+'---in addUserEmailToMemberEmails');
+        } else {
+          tmpl.find('#member-email-input').value = "";
+        }
     });
     Meteor.call('findUserByEmail', email, function(err, result){
       if (err){
@@ -118,13 +121,17 @@ Template.mailingList.events = {
     var clubId = Session.get('routedClubId')
     var email = tmpl.find('#admin-email-input').value;
     if (email.indexOf('@')==-1){
-      alert("Not a valid email. You forgot @.");
+      alert("Yor email need an @");
       return;
     }
     Meteor.call('addUserEmailToAdminEmails',
       email, clubId,
       function(err, result){
-        if (err){ alert(err.reason+'---in addUserEmailToAdminEmails'); }
+        if (err){ 
+          alert(err.reason+'---in addUserEmailToAdminEmails');
+        } else {
+          tmpl.find('#admin-email-input').value = "";
+        }
     });
     Meteor.call('findUserByEmail', email, function(err, result){
       if (err){
