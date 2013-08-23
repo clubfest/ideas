@@ -9,9 +9,10 @@ Template.sendMessage.events = {
       return email.address;
     });
     var sender = Meteor.user().services.google.email;
+    var from = sender;
     receivers.push(sender);
     console.log(sender);
-    Meteor.call('sendToMailingList', sender, sender, receivers, subject, content, function(err){
+    Meteor.call('sendToMailingList', from, sender, receivers, subject, content, function(err){
       if (err){
         alert(err.reason);
       } else {

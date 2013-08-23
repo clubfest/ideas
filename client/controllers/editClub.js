@@ -39,7 +39,15 @@ Template.editClub.events({
       if (err){
         alert(err);
       } else {
-        Meteor.Router.to('/');
+        Meteor.call('removeClubFromAdminRoles', 
+          clubId, Meteor.userId(),
+          function(){
+            if (err){
+              alert(err);
+            }
+          }
+        );
+        Meteor.Router.to('/profile');
       }
     });
   }

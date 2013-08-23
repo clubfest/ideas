@@ -90,7 +90,7 @@ Template.mailingList.events = {
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
-                  'club.fest.on.meteor@gmail.com', 
+                  'welcome@club.fest.on.meteor.com', 
                   'Joining Club.Fest.on.Meteor.com',
                   welcome_email,
                   function(){if (err) {alert(err.reason+'---in sendEmail');}
@@ -150,7 +150,7 @@ Template.mailingList.events = {
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
-                  'club.fest.on.meteor@gmail.com', 
+                  'welcome@club.fest.on.meteor.com', 
                   'Joining Club.Fest.on.Meteor.com',
                   welcome_email,
                   function(){if (err) {alert(err.reason+'---in sendEmail');}

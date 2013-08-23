@@ -104,7 +104,7 @@ function checkSignedIn(){
   }
 }
 
-function checkAdmin(clubId){
+this.checkAdmin = function(clubId){
   if (!isClubAdmin(clubId)){
     throw new Meteor.Error(413, "Only admin can edit.");
   }

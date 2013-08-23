@@ -11,7 +11,7 @@ Template.createClub.events({
         function(err, newClubId){
           if (err) {alert(err.reason+'. Are you signed in?');}
           else {
-            Meteor.call("addClubToAdminRoles",
+            Meteor.call("addClubToAdminRolesFirstTime",
               newClubId, Meteor.userId(),
               function(err, resultId){
                 if (err) {alert(err.reason+'. Are you signed in?')}

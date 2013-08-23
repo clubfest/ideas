@@ -1,4 +1,17 @@
 
+function addClubToAdminRolesInsecure(clubId, userId){
+  var club = Clubs.findOne(clubId);
+  Meteor.users.update(userId, {
+    $addToSet: {
+      clubAdminRoles: {
+        _id: club._id, 
+        name: club.name
+      }
+    }
+  });
+  return clubId;
+}
+
 Meteor.methods({
   addClubToMemberRoles: function(clubId, userId){
     var club = Clubs.findOne(clubId);
@@ -20,20 +33,16 @@ Meteor.methods({
       }
     });
   },
+  addClubToAdminRolesFirstTime: function(clubId, userId){
+    return addClubToAdminRolesInsecure(clubId, userId);
+  },
   addClubToAdminRoles: function(clubId, userId){
-    var club = Clubs.findOne(clubId);
-    Meteor.users.update(userId, {
-      $addToSet: {
-        clubAdminRoles: {
-          _id: club._id, 
-          name: club.name
-        }
-      }
-    });
-    return clubId;
+    checkAdmin(clubId);
+    return addClubToAdminRolesInsecure(clubId, userId);
   },
   removeClubFromAdminRoles: function(clubId, userId){
-    Meteor.users.update(user, {
+    checkAdmin(clubId);
+    Meteor.users.update(userId, {
       $pull: {
         clubAdminRoles: {
           _id: clubId
@@ -52,17 +61,5 @@ Meteor.methods({
     } else {
       return null;
     }
-  },
-  // isClubAdmin: function(clubId){
-  //   var adminRoles = Meteor.user().clubAdminRoles;
-  //   if (adminRoles){
-  //     for (var i=0; i<adminRoles.length; i++){
-  //       if (adminRoles[i]._id===clubId) {
-  //         return true;
-  //       } 
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  }
 });
