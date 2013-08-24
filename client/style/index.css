@@ -1,3 +1,7 @@
+#footer {
+  margin: 10px;
+  margin-top: 50px;
+}
 #body-wrapper {
   max-width: 600px;
   width: 95%;
@@ -43,11 +47,11 @@ p {
     height: 25px;
     overflow: hidden;
   }
-  .login-display-name {
-    /*I don't know how to override display*/
+/*  .login-display-name {
+    I don't know how to override display
     width: 0;
     color: white;
-  }
+  }*/
 }
 
 @media all and (max-width: 500px){
@@ -64,9 +68,9 @@ p {
   .login-button {
     width: 55px;
   }
-  .login-display-name {
-    /*I don't know how to override display*/
+/*  .login-display-name {
+    I don't know how to override display
     width: 0;
     color: white;
-  }
+  }*/
 }

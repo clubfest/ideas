@@ -1,7 +1,7 @@
 <template name='mailingList'>
 {{#if isClubAdmin}}
   {{#with club}}
-    <h2>{{name}}</h2>
+    <h2 id='club-name'>{{name}}</h2>
     <h3>Mailing List</h3>
     <form>
       <input type='email' id='member-email-input' placeholder='Add Email (gmail or cornell)'/>

@@ -38,7 +38,7 @@ Template.mailingList.removeStyle = function(){
 
 
 var welcome_email = '\
-  You have been added to some mailing lists in Club.Fest.on.Meteor\n\n\
+  You have been added to some mailing lists in club.fest.on.meteor.com\n\n\
   If you are a first time user, visit http://club.fest.on.meteor.com/sync'
 
 Template.mailingList.showAdmin = function(){
@@ -68,25 +68,25 @@ Template.mailingList.events = {
       email, clubId,
       function(err, result){
         if (err){ 
-          alert(err.reason+'---in addUserEmailToMemberEmails');
+          alert(err.reason);
         } else {
           tmpl.find('#member-email-input').value = "";
         }
     });
     Meteor.call('findUserByEmail', email, function(err, result){
       if (err){
-        alert(err.reason, '---in findUserByEmail');
+        alert(err.reason);
       } else {
         if (result) {
           Meteor.call('addClubToMemberRoles',
             clubId, result,
             function(err,result){
-              if (err) {alert(err.reason+'----in addClubToMemberRoles');}
+              if (err) {alert(err.reason);}
           });
         } else {     
           Meteor.call('findTempUserByEmail', email, function(err, tempUserId){
             if (err){
-              alert(err.reason+'---in findTempUserByEmail');
+              alert(err.reason);
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
@@ -97,17 +97,17 @@ Template.mailingList.events = {
                 });
                 Meteor.call('createTempUser', email, function(err, newId){
                   if (err){
-                    alert(err.reason+'---in createTempUser');
+                    alert(err.reason);
                   } else {
                     Meteor.call('addClubToTempMemberRoles', clubId, newId, function(err){
-                      if (err) {alert(err.reason+'---in addClubToTempMemberRoles');}
+                      if (err) {alert(err.reason);}
                     });
                   }
                 });
               } else {
                 Meteor.call('addClubToTempMemberRoles', clubId, tempUserId,
                   function(){
-                    if (err) {alert(err.reason+'---in addClubToTempMemberRoles');}
+                    if (err) {alert(err.reason);}
                 });
               }
             }
@@ -128,25 +128,25 @@ Template.mailingList.events = {
       email, clubId,
       function(err, result){
         if (err){ 
-          alert(err.reason+'---in addUserEmailToAdminEmails');
+          alert(err.reason);
         } else {
           tmpl.find('#admin-email-input').value = "";
         }
     });
     Meteor.call('findUserByEmail', email, function(err, result){
       if (err){
-        alert(err.reason, '---in findUserByEmail');
+        alert(err.reason);
       } else {
         if (result) {
           Meteor.call('addClubToAdminRoles',
             clubId, result,
             function(err,result){
-              if (err) {alert(err.reason+'----in addClubToAdminRoles');}
+              if (err) {alert(err.reason);}
           });
         } else {     
           Meteor.call('findTempUserByEmail', email, function(err, tempUserId){
             if (err){
-              alert(err.reason+'---in findTempUserByEmail');
+              alert(err.reason);
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
@@ -157,17 +157,17 @@ Template.mailingList.events = {
                 });
                 Meteor.call('createTempUser', email, function(err, newId){
                   if (err){
-                    alert(err.reason+'---in createTempUser');
+                    alert(err.reason);
                   } else {
                     Meteor.call('addClubToTempAdminRoles', clubId, newId, function(err){
-                      if (err) {alert(err.reason+'---in addClubToTempAdminRoles');}
+                      if (err) {alert(err.reason);}
                     });
                   }
                 });
               } else {
                 Meteor.call('addClubToTempAdminRoles', clubId, tempUserId,
                   function(){
-                    if (err) {alert(err.reason+'---in addClubToTempAdminRoles');}
+                    if (err) {alert(err.reason);}
                 });
               }
             }
@@ -178,14 +178,32 @@ Template.mailingList.events = {
   },
   'click .remove-btn': function(evt, tmpl){
     var email = evt.currentTarget.dataset.email;
-    var shouldRemove = confirm('Are you sure you want to get rid of '+email);
+    var shouldRemove = confirm('I am about to get rid of '+email);
+    var clubName = tmpl.find('#club-name').textContent;
+    var subject = clubName + ' removed you from their mailing list'
+    var message = clubName + ' has removed you from their mailing list.\
+    \nBut the club is still in your profile page just in case you want to rejoin.\
+    \nIf you want to remove it from your profile page, click edit at the bottom right of the profile page.'
+    clubName = clubName.replace(/\s/g, '.');
+    clubName = clubName.replace(/@/g, '');
     if (shouldRemove){
       Meteor.call('removeUserEmailFromMemberEmails',
         email, Session.get('routedClubId'),
         function(err, result){
-          if (err){alert(err.reason);}
-      });
-      // Should we remove the role of the user as well?
+          if (err){
+            alert(err.reason);
+          }
+        }
+      );
+      Meteor.call('sendEmail', email, clubName+'@club.fest.on.meteor.com', subject, message,
+        function(err){
+          if (err) {
+            alert(err.reason);
+          } else {
+            console.log("email is sent.");
+          }
+        }
+      );
     }
   }
 }

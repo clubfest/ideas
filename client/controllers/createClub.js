@@ -16,7 +16,8 @@ Template.createClub.events({
               function(err, resultId){
                 if (err) {alert(err.reason+'. Are you signed in?')}
                 else {routeToClub(resultId);}
-            });
+              }
+            );
           }
         }
       )
@@ -43,9 +44,9 @@ function tmplToClubObj(tmpl){
     categoryId: catId,
     categoryName: catName,
     content: '<h3>About</h3> \
-      \n<p>'+description+'</p> \
+      \n<p>Inspire people to join your mailing list by adding content, images and videos.</p> \
       \n<h3>Meeting time</h3> \
-      \n<p>Click edit to add more info</p>'
+      \n<p>Just Click "edit club page" start.</p>'
   };
 }
 

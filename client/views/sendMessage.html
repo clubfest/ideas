@@ -1,16 +1,23 @@
 <template name='sendMessage'>
 
-<h3>Email message</h3>
-<form>
-  <h4>Subject</h4>
-  <input type='text' id='email-subject'/>
-  <br/>
-  <h4>Content</h4>
-  <textarea id='email-content'></textarea>
-  <br/>
-  <input type='submit' value='Send' id='send-btn'/>
-</form>
 {{#with club}}
+  <h3>Email message</h3>
+  <form>
+    <h4>Subject</h4>
+    <input type='text' id='email-subject'/>
+    <br/>
+    <h4>Content</h4>
+    <textarea id='email-content'></textarea>
+    <br/>
+    <select id='email-to'>
+      <option value='members' selected>Members</option>
+      <option value='admins'>Admins</option>
+    </select>
+    <br/>
+    <input type='hidden' value='{{name}}' id='club-name-input'/>
+    <input type='submit' value='Send' id='send-btn'/>
+  </form>
+
   {{> clubAdminNavbar}}
 {{/with}}
 </template>

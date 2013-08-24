@@ -42,6 +42,10 @@ Meteor.methods({
   },
   removeClubFromAdminRoles: function(clubId, userId){
     checkAdmin(clubId);
+    var club = Clubs.findOne(clubId);
+    if (club.adminEmails.length < 2 && !club.removed){
+      throw new Meteor.Error(413, 'You are the last admin. Please remove the club first at the edit page.')
+    }
     Meteor.users.update(userId, {
       $pull: {
         clubAdminRoles: {

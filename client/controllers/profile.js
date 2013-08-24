@@ -33,12 +33,12 @@ Template.profile.events = {
       Meteor.call('removeUserEmailFromAdminEmails',
         email, evt.currentTarget.dataset.id,
         function(err, result){
-          if (err){ alert('removeEmail----', err.reason); }
+          if (err){ alert(err.reason); }
       });
       Meteor.call('removeClubFromAdminRoles',
         evt.currentTarget.dataset.id, Meteor.userId(),
         function(err, result){
-          if(err) { alert('removeClub----', err.reason); }
+          if(err) { alert(err.reason); }
       });
     });
   }

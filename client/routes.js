@@ -7,7 +7,8 @@ Meteor.Router.add({
     return 'category';
   },
   '/allClubs': function(){
-    return 'allClubs';
+    Session.set('routedClubName', '');
+    return 'clubsByName';
   },
   '/clubId/:id': function(id){
     Session.set('routedClubId', id);
@@ -31,6 +32,14 @@ Meteor.Router.add({
     Session.set('routedClubId', id);
     return 'sendMessage';
   },
+  '/name': function(){
+    Session.set('routedClubName', '');
+    return 'clubsByName';
+  },
+  '/name/:clubName': function(clubName){
+    Session.set('routedClubName', clubName);
+    return 'clubsByName';
+  },
   '/feedback': 'feedback',
   //   '/editClub/:name': function(name){
   //   Session.set('routedClubName', name)
@@ -47,7 +56,6 @@ Meteor.Router.add({
   //   Session.set('routedClubName', name)
   //   return 'club';
   // },
-  '/:error': function(){
-    return 'errorPage';
-  }
+  '/notFound': 'notFound',
+  '/:error': 'notFound'
 });
