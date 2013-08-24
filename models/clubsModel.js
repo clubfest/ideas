@@ -32,9 +32,10 @@ Meteor.methods({
   },
   addUserEmailToMemberEmails: function(email, clubId){
     check(email, String);
+    checkDuplicateEmail(email, clubId);
     // checkAdmin(clubId);
     Clubs.update(clubId, {
-      $addToSet: {memberEmails: {address: email, createdOn: new Date().getTime()}}
+      $push: {memberEmails: {address: email, createdOn: new Date().getTime()}}
     });
   },
   removeUserEmailFromMemberEmails: function(email, clubId){
@@ -45,8 +46,9 @@ Meteor.methods({
   },
   addUserEmailToAdminEmails: function(email, clubId){
     checkAdmin(clubId);
+    checkDuplicateEmail(email, clubId);
     Clubs.update(clubId, {
-      $addToSet: {adminEmails: {address: email, createdOn: new Date().getTime()}}
+      $push: {adminEmails: {address: email, createdOn: new Date().getTime()}}
     });
   },
   removeUserEmailFromAdminEmails: function(email, clubId){
@@ -75,6 +77,16 @@ Meteor.methods({
     
   }
 })
+
+function checkDuplicateEmail(email, clubId){
+  email = email.toLowerCase();
+  var club = Clubs.findOne(clubId);
+  for (var i=0; i<club.memberEmails.length; i++){
+    if (club.memberEmails[i].address.toLowerCase() == email){
+      throw new Meteor.Error(413, 'The email you are trying to add is duplicate.')
+    }
+  }
+}
 
 
 function checkClubFields(club){

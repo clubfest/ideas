@@ -1,5 +1,12 @@
+## Bugs
+
+* emails have duplicate
+* videos
+* logins on phones
 
 ## TODO
+
+* bcc only for members-wide email.
 
 Remove userId for all the Meteor.methods for better security
 
