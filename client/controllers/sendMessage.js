@@ -16,8 +16,10 @@ Template.sendMessage.events = {
       });
 
     } else {
-      receivers = _.map(Clubs.findOne(clubId).memberEmails, function(email){
-        return email.address;
+      receivers = []
+      _.each(Clubs.findOne(clubId).memberEmails, function(email){
+        // if (receivers.indexOf(email.address) > -1){}
+        receivers.push(email.address);
       });
     }
     var sender = Meteor.user().services.google.email;

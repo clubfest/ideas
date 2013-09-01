@@ -27,8 +27,6 @@ Template.editClub.events({
       function(err){
         if (err){
           alert(err.reason);
-        } else {
-          Meteor.Router.to('/clubId/'+clubId);
         }
       }
     )

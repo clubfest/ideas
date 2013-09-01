@@ -3,6 +3,14 @@ Template.mailingList.created = function(){
   Session.set('sortByDate', true);
 }
 
+Template.mailingList.sortByWhat = function(){
+  if (Session.get('sortByDate')){
+    return 'alphabet'
+  } else {
+    return 'date'
+  }
+}
+
 Template.mailingList.club = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));
   if (Session.get('sortByDate')){

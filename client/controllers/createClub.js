@@ -44,9 +44,9 @@ function tmplToClubObj(tmpl){
     categoryId: catId,
     categoryName: catName,
     content: '<h3>About</h3> \
-      \n<p>Inspire people to join your mailing list by adding content, images and videos.</p> \
+      \n<p>Inspire people to join your mailing list by adding content, images or youtube videos.</p> \
       \n<h3>Meeting time</h3> \
-      \n<p>Just Click "edit club page" start.</p>'
+      \n<p>Just Click "edit club page" to start.</p>'
   };
 }
 

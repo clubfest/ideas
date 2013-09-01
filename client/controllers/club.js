@@ -1,4 +1,10 @@
 //isClubAdmin in globalHelpers
+Template.club.created = function(){
+  var club = Clubs.findOne(Session.get('routedClubId'));
+  if (club){
+    document.title = club.name;
+  }
+}
 
 Template.club.events = {
   'click #join-btn': function(){
