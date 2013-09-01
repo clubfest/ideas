@@ -2,7 +2,7 @@
 Template.club.created = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));
   if (club){
-    document.title = club.name;
+    document.title = 'Cornell - '+club.name;
   }
 }
 
@@ -35,6 +35,13 @@ Template.club.events = {
         function(err, result){
           if(err) { alert(err); }
       });
+    });
+  },
+  'click #list-serv-btn': function(){
+    bootbox.prompt("What is your list-serv name?", function(result) {                
+      if (result !== null) {
+        Meteor.call('addListServName', result, Session.get('routedClubId'));                     
+      }
     });
   }
 }

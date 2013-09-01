@@ -17,8 +17,8 @@ Template.mailingList.club = function(){
     return {
       name: club.name,
       _id: club._id,
-      memberEmails: club.memberEmails.sort(createdOnReverseSort),
-      adminEmails: club.adminEmails.sort(createdOnReverseSort)
+      memberEmails: club.memberEmails.reverse(),
+      adminEmails: club.adminEmails.reverse()
     }
   } else {
     return {

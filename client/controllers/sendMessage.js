@@ -14,7 +14,6 @@ Template.sendMessage.events = {
       receivers = _.map(Clubs.findOne(clubId).adminEmails, function(email){
         return email.address;
       });
-
     } else {
       receivers = []
       _.each(Clubs.findOne(clubId).memberEmails, function(email){
@@ -36,6 +35,31 @@ Template.sendMessage.events = {
         }
       }
     )
+  },
+  'click #gmail-btn': function(evt, tmpl){
+    evt.preventDefault();
+    var clubId = Session.get('routedClubId');
+    var subject = tmpl.find('#email-subject').value;
+    var content = tmpl.find('#email-content').value;
+    var clubName = tmpl.find('#club-name-input').value;
+    var adminArray = [];
+    _.each(Clubs.findOne(clubId).adminEmails, function(email){
+      adminArray.push(email.address);
+    });
+    var emailToOptions = tmpl.find('#email-to').value;
+    if (emailToOptions=='members'){
+      var memberArray = [];
+      _.each(Clubs.findOne(clubId).memberEmails, function(email){
+        memberArray.push(email.address);
+      });
+    }
+    var gmailUrl = 'http://mail.google.com/mail/?view=cm&fs=1'+
+                '&to=' + adminArray.join() +
+                '&bcc=' + memberArray.join() +
+                '&su=' + subject +
+                '&body=' + content +
+                '&ui=1';
+    window.open(gmailUrl, '_blank');
   }
 }
 

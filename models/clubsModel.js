@@ -30,6 +30,10 @@ Meteor.methods({
       desc: desc
     }});
   },
+  addListServName: function(name, clubId){
+    checkAdmin(clubId);
+    Clubs.update(clubId, {$set: {listServ: name}});
+  },
   addUserEmailToMemberEmails: function(email, clubId){
     check(email, String);
     checkDuplicateEmail(email, clubId);

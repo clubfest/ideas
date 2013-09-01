@@ -1,6 +1,7 @@
 {
   "packages": {
     "router": {},
-    "event-hooks": {}
+    "event-hooks": {},
+    "bootboxjs": {}
   }
 }
