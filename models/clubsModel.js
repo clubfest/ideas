@@ -36,7 +36,7 @@ Meteor.methods({
   },
   addUserEmailToMemberEmails: function(email, clubId){
     check(email, String);
-    checkDuplicateEmail(email, clubId);
+    //checkDuplicateEmail(email, clubId);
     // checkAdmin(clubId);
     Clubs.update(clubId, {
       $push: {memberEmails: {address: email, createdOn: new Date().getTime()}}
@@ -85,6 +85,10 @@ Meteor.methods({
 function checkDuplicateEmail(email, clubId){
   email = email.toLowerCase();
   var club = Clubs.findOne(clubId);
+  console.log('clubId is ', club)
+  if (!club.memberEmails){
+    return;
+  }
   for (var i=0; i<club.memberEmails.length; i++){
     if (club.memberEmails[i].address.toLowerCase() == email){
       throw new Meteor.Error(413, 'The email you are trying to add is duplicate.')

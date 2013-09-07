@@ -1,6 +1,8 @@
 <template name='mailingList'>
 {{#if isClubAdmin}}
   {{#with club}}
+    {{> clubAdminNavbar}}
+      <div style="clear: both;"></div>
     <h2 id='club-name'>{{name}}</h2>
     <h3>Mailing List</h3>
     <form>
@@ -49,7 +51,6 @@
     <i class='icon-list'></i>
     Sort by {{sortByWhat}}
   </a>
-  {{> clubAdminNavbar}}
 
   {{/with}}
 {{else}}

@@ -1,3 +1,7 @@
+Template.editClub.created = function(){
+  Session.set('atClubHome', false)
+}
+
 Template.editClub.getClub = function(){
   return Clubs.findOne(Session.get('routedClubId'));
 }

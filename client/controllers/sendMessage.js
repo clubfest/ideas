@@ -47,8 +47,8 @@ Template.sendMessage.events = {
       adminArray.push(email.address);
     });
     var emailToOptions = tmpl.find('#email-to').value;
+    var memberArray = [];
     if (emailToOptions=='members'){
-      var memberArray = [];
       _.each(Clubs.findOne(clubId).memberEmails, function(email){
         memberArray.push(email.address);
       });
@@ -65,4 +65,8 @@ Template.sendMessage.events = {
 
 Template.sendMessage.club = function(){
   return Clubs.findOne(Session.get('routedClubId'))
+}
+
+Template.sendMessage.created = function(){
+  Session.set('atClubHome', false)
 }

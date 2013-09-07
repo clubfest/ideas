@@ -20,16 +20,22 @@
           </div>
         {{/isolate}}
         <div style='clear:both;'></div>
+
+    <form id='netid-form'>
+      <input type='text' id='netid-input' placeholder='Cornell NetID' />
+      <input type='submit' value='Add Net ID to mailing list' />
+    </form>
+        {{#if isClubAdmin}}
+<!--           <h3>Admin navigation</h3>
+          <a class='btn' id='list-serv-btn'><i class='icon-envelope'></i> Integrate with list-serv</a> -->
+          {{> clubAdminNavbar}}
+        {{/if}}
+        <div style='clear: both;'></div>
         <h1>{{name}}</h1>        
         <div id='club-content'>
           {{{content}}}
         </div>
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fclub.fest.on.meteor.com/clubId/{{_id}}&amp;width=300&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=513438482080102" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:35px;" allowTransparency="true"></iframe>
-        {{#if isClubAdmin}}
-          <h3>Admin navigation</h3>
-          <a class='btn' id='list-serv-btn'><i class='icon-envelope'></i> Integrate with list-serv</a>
-          {{> clubAdminNavbar}}
-        {{/if}}
       {{/with}}
     {{else}}    
       {{> loadingPage}}

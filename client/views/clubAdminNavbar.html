@@ -1,6 +1,12 @@
 <template name='clubAdminNavbar'>
 <div id='clear-wrapper'>
   <div id='club-admin-nav'>
+    {{#if atClubHome}}
+    {{else}}
+      <a href="/clubId/{{_id}}">
+        <i class='icon-chevron-up'></i> Back
+      </a>
+    {{/if}}
     <a href='/edit/clubId/{{_id}}' id='edit-btn'>
       <i class='icon-pencil'></i>
       Edit club page

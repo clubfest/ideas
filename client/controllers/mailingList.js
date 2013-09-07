@@ -1,4 +1,5 @@
 Template.mailingList.created = function(){
+  Session.set('atClubHome', false)
   Session.set('removeStyle', 'display: none;');
   Session.set('sortByDate', true);
 }
@@ -101,7 +102,7 @@ Template.mailingList.events = {
                   'welcome@club.fest.on.meteor.com', 
                   'Joining Club.Fest.on.Meteor.com',
                   welcome_email,
-                  function(){if (err) {alert(err.reason+'---in sendEmail');}
+                  function(err){if (err) {alert(err.reason+'---in sendEmail');}
                 });
                 Meteor.call('createTempUser', email, function(err, newId){
                   if (err){

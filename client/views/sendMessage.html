@@ -1,6 +1,8 @@
 <template name='sendMessage'>
 
 {{#with club}}
+  {{> clubAdminNavbar}}
+  <div style="clear: both;"></div>
   <h3>Email message</h3>
   <form>
     <h4>Subject</h4>
@@ -18,7 +20,5 @@
     <input type='submit' value='Send' id='send-btn'/>
     <button id='gmail-btn'>Go to gmail to send it</button>
   </form>
-
-  {{> clubAdminNavbar}}
 {{/with}}
 </template>

@@ -1,5 +1,8 @@
+
+
 //isClubAdmin in globalHelpers
 Template.club.created = function(){
+  Session.set('atClubHome', true)
   var club = Clubs.findOne(Session.get('routedClubId'));
   if (club){
     document.title = 'Cornell - '+club.name;
@@ -43,8 +46,37 @@ Template.club.events = {
         Meteor.call('addListServName', result, Session.get('routedClubId'));                     
       }
     });
+  },
+  'submit #netid-form': function(evt, tmpl){
+    evt.preventDefault();
+    var netId = $('#netid-input').val();
+    if (netId.match(/^[a-z]+[0-9]+$/)){
+      var email = netId + '@cornell.edu';
+      var club = Clubs.findOne(Session.get('routedClubId'));
+      Meteor.call('addUserEmailToMemberEmails',
+        email, club._id,
+        function(err, result){
+          if (err){ 
+            alert(err.reason);
+          } else {
+            tmpl.find('#netid-input').value = "";
+          }
+      });
+      Meteor.call('sendEmail', email,
+        'welcome@club.fest.on.meteor.com', 
+        club.name + ' has added you to their mailing list',
+        welcome_email,
+        function(err){if (err) {alert(err.reason+'---in sendEmail');}
+      });
+    } else {
+      alert('Net ID must be lowercase letters followed by numbers.');
+    }
+
   }
 }
+
+var welcome_email = '\
+  Check out other clubs at club.fest.on.meteor.com'
 
 Template.club.getClub = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));

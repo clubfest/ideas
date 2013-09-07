@@ -5,13 +5,6 @@
     {{#if currentUser}}
       <a href='/profile'><i class='icon-briefcase'></i> Profile</a>
     {{/if}}
-    {{#if currCategory}}
-      {{#with currCategory}}
-        <a href='/categoryId/{{_id}}'>
-          <i class='icon-chevron-up'></i> {{name}}
-        </a>
-      {{/with}}
-    {{/if}}
   </div>
   <div id='right-nav'>
     {{loginButtons}}

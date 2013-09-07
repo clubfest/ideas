@@ -5,3 +5,11 @@ Template.navbar.currCategory = function(){
     return {_id: club.categoryId, name: club.categoryName}
   }
 }
+
+Template.navbar.currClub = function(){
+  return Clubs.findOne(Session.get('routedClubId'));
+}
+
+Template.navbar.abbrev = function(arg){
+  return arg.slice(0, 10) + '...'
+}

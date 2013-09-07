@@ -1,6 +1,8 @@
 <template name='editClub'>
 {{#if isClubAdmin}}
   {{#with getClub}}
+    {{> clubAdminNavbar}}
+    <div style="clear: both;"></div>
     <h2>{{name}}</h2>
     <textarea id='content-editor'>{{{content}}}</textarea>
     <div>
@@ -20,8 +22,6 @@
     </div>
 
     <div style='margin-top: 20px;'><a id='remove-btn' class='btn btn-danger'>Remove your club</a></div>
-    {{> clubAdminNavbar}}
-
 
 
   {{/with}}
