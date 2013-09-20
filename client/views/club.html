@@ -3,28 +3,23 @@
     {{#if club}}
       {{#with club}}
         {{#isolate}}
-          <div id='join-bar'>
-            <div>
-            {{#if isMember}}
-              <a id='unjoin-btn' class='btn'>
-                <i class='icon-remove-sign'></i>
-                Unjoin mailing list
-              </a>
-            {{else}}
-              <a id='join-btn' class='btn btn-primary'>
-                <i class='icon-star'></i>
-                Join this club's mailing list
-              </a>
-            {{/if}}
-            </div>
-          </div>
+          <form id='netid-form' style='margin: 40px 0px;'>
+            <input 
+              type='text' 
+              id='netid-input'
+              placeholder='Cornell NetID'
+              autocapitalize='off'
+              autocorrect='off'
+              style='width: 200px; font-size: 24px; padding-top: 10px'
+               />
+            <br/>
+            <input type='submit'
+              value='Add Net ID to mailing list'
+              style='padding: 5px' />
+          </form>
         {{/isolate}}
-        <div style='clear:both;'></div>
 
-    <form id='netid-form'>
-      <input type='text' id='netid-input' placeholder='Cornell NetID' />
-      <input type='submit' value='Add Net ID to mailing list' />
-    </form>
+    
         {{#if isClubAdmin}}
 <!--           <h3>Admin navigation</h3>
           <a class='btn' id='list-serv-btn'><i class='icon-envelope'></i> Integrate with list-serv</a> -->
@@ -34,6 +29,21 @@
         <h1>{{name}}</h1>        
         <div id='club-content'>
           {{{content}}}
+        </div>
+        <div id='join-bar'>
+          <div>
+          {{#if isMember}}
+            <a id='unjoin-btn' class='btn'>
+              <i class='icon-remove-sign'></i>
+              Unjoin mailing list
+            </a>
+          {{else}}
+            <a id='join-btn' class='btn btn-primary'>
+              <i class='icon-star'></i>
+              Join this club's mailing list
+            </a>
+          {{/if}}
+          </div>
         </div>
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fclub.fest.on.meteor.com/clubId/{{_id}}&amp;width=300&amp;height=35&amp;colorscheme=light&amp;layout=standard&amp;action=like&amp;show_faces=false&amp;send=true&amp;appId=513438482080102" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:35px;" allowTransparency="true"></iframe>
       {{/with}}

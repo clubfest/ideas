@@ -50,7 +50,7 @@ Template.club.events = {
   'submit #netid-form': function(evt, tmpl){
     evt.preventDefault();
     var netId = $('#netid-input').val();
-    if (netId.match(/^[a-z]+[0-9]+$/)){
+    if (netId.match(/[0-9]+$/)){
       var email = netId + '@cornell.edu';
       var club = Clubs.findOne(Session.get('routedClubId'));
       Meteor.call('addUserEmailToMemberEmails',
@@ -69,7 +69,7 @@ Template.club.events = {
         function(err){if (err) {alert(err.reason+'---in sendEmail');}
       });
     } else {
-      alert('Net ID must be lowercase letters followed by numbers.');
+      alert('Net ID should end with numbers.');
     }
 
   }
