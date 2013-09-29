@@ -1,14 +1,14 @@
 <template name='createClub'>
-<h2>Create a club</h2>
+<h2>Create a project idea page</h2>
 <form>
-  <label for='name'>Club Name</label>
+  <label for='name'>Name</label>
   <input type='text' id='name'/>
   <br/>
   <label for='desc'>Brief Description</label>
   <textarea id='desc' placeholder='140 characters or less'></textarea>
   <br/>
   <select id='categoryId'>
-    <option value="" disabled selected>Category for your club</option>
+    <option value="" disabled selected>Category</option>
     {{#each categories}}
       <option value='{{_id}}'>{{name}}</option>
     {{/each}}
@@ -16,5 +16,15 @@
   <br/>
   <input type='submit' value='create'/>
 </form>
+
+<h3>Examples</h3>
+<ul class='no-bullet'>
+  {{#each categories}}
+    <li>
+      <a href="/categoryId/{{_id}}">{{name}}</a>: {{desc}}</li>
+    </li>
+  {{/each}}
+</ul>
+  
 
 </template>

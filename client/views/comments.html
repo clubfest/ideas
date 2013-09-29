@@ -1,0 +1,49 @@
+<template name='comments'>
+<h3>Comment</h3>
+
+  <div class='comments'>
+    <textarea id='comment-textarea' placeholder='Give this project some feedback'></textarea>
+    <a class="btn" id='comment-btn'>Comment</a>
+    {{#each comments}}
+      <div class='comment'>
+        <div class='comment-content'>
+          {{#if isAuthor}}  
+            <div data-comment-id="{{_id}}" class="comment-editable" data-type="text" data-emptytext="Click here to edit">
+              {{content}}
+            </div>
+          {{else}}
+            {{content}}
+          {{/if}}
+        </div>
+        <div class='comment-author'>
+          {{authorName}}
+        </div>
+        <div class='comment-date'>
+          {{date}}
+        </div>
+      </div>
+      <div class='responses'>
+        {{#each responses}}
+          <div class='response'>
+            <div class='response-content'>
+            {{#if isAuthor}}  
+              <div data-created-at="{{createdAt}}" class="response-editable" data-type="text" data-emptytext="Click here to edit">
+                {{content}}
+              </div>
+            {{else}}
+              {{content}}
+            {{/if}}
+            </div>
+            <div class='response-author'>
+              {{authorName}}
+            </div>
+            <div class='response-date'>
+              {{date}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+      <a class='respond-btn' data-comment-id='{{_id}}'>Respond</a>
+    {{/each}}
+  </div>
+</template>

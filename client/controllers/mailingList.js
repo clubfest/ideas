@@ -47,8 +47,8 @@ Template.mailingList.removeStyle = function(){
 
 
 var welcome_email = '\
-  You have been added to some mailing lists in club.fest.on.meteor.com\n\n\
-  If you are a first time user, visit http://club.fest.on.meteor.com/sync'
+  You have been added to some mailing lists in ideas.on.meteor.com\n\n\
+  If you are a first time user, visit http://ideas.on.meteor.com/sync'
 
 Template.mailingList.showAdmin = function(){
   return true;
@@ -99,8 +99,8 @@ Template.mailingList.events = {
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
-                  'welcome@club.fest.on.meteor.com', 
-                  'Joining Club.Fest.on.Meteor.com',
+                  'welcome@ideas.on.meteor.com', 
+                  'Joining ideas.on.Meteor.com',
                   welcome_email,
                   function(err){if (err) {alert(err.reason+'---in sendEmail');}
                 });
@@ -159,8 +159,8 @@ Template.mailingList.events = {
             } else {
               if (!tempUserId){
                 Meteor.call('sendEmail', email,
-                  'welcome@club.fest.on.meteor.com', 
-                  'Joining Club.Fest.on.Meteor.com',
+                  'welcome@ideas.on.meteor.com', 
+                  'Joining ideas.on.Meteor.com',
                   welcome_email,
                   function(){if (err) {alert(err.reason+'---in sendEmail');}
                 });
@@ -204,7 +204,35 @@ Template.mailingList.events = {
           }
         }
       );
-      Meteor.call('sendEmail', email, clubName+'@club.fest.on.meteor.com', subject, message,
+      Meteor.call('sendEmail', email, clubName+'@ideas.on.meteor.com', subject, message,
+        function(err){
+          if (err) {
+            alert(err.reason);
+          } else {
+            console.log("email is sent.");
+          }
+        }
+      );
+    }
+  },
+  'click .remove-admin-btn': function(evt, tmpl){
+    var email = evt.currentTarget.dataset.email;
+    var shouldRemove = confirm('I am about to get rid of '+email);
+    var clubName = tmpl.find('#club-name').textContent;
+    var subject = clubName + ' removed you from the admin list'
+    var message = clubName + ' has removed you from their admin list.'
+    clubName = clubName.replace(/\s/g, '.');
+    clubName = clubName.replace(/@/g, '');
+    if (shouldRemove){
+      Meteor.call('removeUserEmailFromAdminEmails',
+        email, Session.get('routedClubId'),
+        function(err, result){
+          if (err){
+            alert(err.reason);
+          }
+        }
+      );
+      Meteor.call('sendEmail', email, clubName+'@ideas.on.meteor.com', subject, message,
         function(err){
           if (err) {
             alert(err.reason);

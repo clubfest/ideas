@@ -1,8 +1,8 @@
 <template name='profile'>
 <h2>My Profile</h2>
 {{#with currentUser}}
+  <h3>Mailing Lists</h3>
   {{#if clubMemberRoles}}
-    <h3>Mailing Lists</h3>
     <table class='joined-table'>
       {{#each clubMemberRoles}}
       <tr>
@@ -22,12 +22,12 @@
   {{else}}
   <p>
     You are not on any mailing list currently. 
-    <a href='/allClubs'>Go join some clubs.</a>
+    <a href='/allClubs'>Go join some projects.</a>
   </p>   
   {{/if}}
 
   {{#if clubAdminRoles}}
-    <h3>Club Admin</h3>
+    <h3>Project Admin</h3>
     <table class='joined-table'>
       {{#each clubAdminRoles}}
       <tr>

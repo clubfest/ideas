@@ -2,6 +2,10 @@
   margin-top: 30px;
 }
 
+#club-admin-nav{
+  margin-bottom: 20px;
+}
+
 @media all and (max-width: 500px){
   #club-admin-nav a{
     display: block;

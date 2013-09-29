@@ -1,8 +1,5 @@
 Meteor.Router.add({
   '/': 'home',
-  '/startup': function(){
-    location.href = "/clubId/ox4R25cHYKvhNWGjo"
-  },
   '/instruction': 'instruction',
   '/createClub': 'createClub',
   '/categoryId/:id': function(id){

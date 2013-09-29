@@ -1,5 +1,5 @@
 Template.createClub.categories = function(){
-  return Categories.find().fetch();
+  return Categories.find({}, {sort: {name: 1}}).fetch();
 }
 
 Template.createClub.events({
@@ -43,10 +43,10 @@ function tmplToClubObj(tmpl){
     desc: description,
     categoryId: catId,
     categoryName: catName,
-    content: '<h3>About</h3> \
-      \n<p>Inspire people to join your mailing list by adding content, images or youtube videos.</p> \
-      \n<h3>Meeting time</h3> \
-      \n<p>Just Click "edit club page" to start.</p>'
+    content: '<h3>Problem</h3> \
+      \n<p>Life is too hard</p> \
+      \n<h3>Solution</h3> \
+      \n<p>Click edit to answer</p>'
   };
 }
 

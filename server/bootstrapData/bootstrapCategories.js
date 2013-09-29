@@ -3,48 +3,36 @@ Meteor.startup(function() {
   // Clubs.remove({});
   if (Categories.find().count()===0){
     Categories.insert({
-      name: "Art",
-      desc: "Basically everything in life is art"
+      name: "Social",
+      desc: "Facebook and Twitter"
     });
     Categories.insert({
-      name: "Business",
-      desc: "With money comes responsibility."
+      name: "Entertainment",
+      desc: "Youtube and Netflix"
     });
     Categories.insert({
-      name: "Culture",
-      desc: 'This is the basis of human society'
+      name: "Education",
+      desc: 'StackOverflow and Quora'
     });
     Categories.insert({
-      name: "Leisure",
-      desc: 'This should be enough to cover all clubs that does not fit into other categories.'
+      name: "Data",
+      desc: 'Google and weedmatch.io'
     });
     Categories.insert({
-      name: "Performing Arts",
-      desc: "Making life more entertaining"
+      name: "Commerce",
+      desc: "Ebay and Amazon"
     });
     Categories.insert({
-      name: "Politics",
-      desc: "It's time to save the government"
+      name: "Location",
+      desc: "Four Square"
     });
     Categories.insert({
-      name: "Publications",
-      desc: "Powerful stuff"
+      name: "Developers Productivity",
+      desc: "Github and MeteorJS"
     });
     Categories.insert({
-      name: "Religion",
-      desc: "Powerful stuff"
-    });
-    Categories.insert({
-      name: "Service",
-      desc: "Help yourself by helping others"
-    });
-    Categories.insert({
-      name: "Sports",
-      desc: "It's in the game, that you learn to live."
-    });
-    Categories.insert({
-      name: "Technology",
-      desc: "It's time to conquer the machines."
+      name: "Productivity",
+      desc: "Instagram"
     });
   }
 });

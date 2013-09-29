@@ -63,7 +63,7 @@ Template.club.events = {
           }
       });
       Meteor.call('sendEmail', email,
-        'welcome@club.fest.on.meteor.com', 
+        'welcome@ideas.on.meteor.com', 
         club.name + ' has added you to their mailing list',
         welcome_email,
         function(err){if (err) {alert(err.reason+'---in sendEmail');}
@@ -76,7 +76,7 @@ Template.club.events = {
 }
 
 var welcome_email = '\
-  Check out other clubs at club.fest.on.meteor.com'
+  Check out other clubs at ideas.on.meteor.com'
 
 Template.club.getClub = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));

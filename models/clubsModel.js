@@ -5,6 +5,8 @@ Meteor.methods({
     checkSignedIn();
     checkClubFields(club);
     checkDuplicateName(club.name);
+    club.adminsCount = 1;
+    club.membersCount = 0;
     club.createdOn = new Date().getTime();
     club.memberEmails = [];
     club.adminEmails = [{
@@ -27,7 +29,7 @@ Meteor.methods({
     checkClubFields(club);
     return Clubs.update(clubId, {$set: {
       name: name,
-      desc: desc
+      desc: desc,
     }});
   },
   addListServName: function(name, clubId){
@@ -41,11 +43,15 @@ Meteor.methods({
     Clubs.update(clubId, {
       $push: {memberEmails: {address: email, createdOn: new Date().getTime()}}
     });
+    Clubs.update(clubId, {$inc: {membersCount: 1}});
   },
   removeUserEmailFromMemberEmails: function(email, clubId){
     // checkAdmin(clubId);
     Clubs.update(clubId, {
       $pull: {memberEmails: {address: email}}
+    });
+    Clubs.update(clubId, {
+      $set: {membersCount: Clubs.findOne(clubId).memberEmails.length}
     });
   },
   addUserEmailToAdminEmails: function(email, clubId){
@@ -54,11 +60,15 @@ Meteor.methods({
     Clubs.update(clubId, {
       $push: {adminEmails: {address: email, createdOn: new Date().getTime()}}
     });
+    Clubs.update(clubId, {$inc: {adminsCount: 1}});
   },
   removeUserEmailFromAdminEmails: function(email, clubId){
     checkAdmin(clubId);
     Clubs.update(clubId, {
       $pull: {adminEmails: {address: email}}
+    });
+    Clubs.update(clubId, {
+      $set: {adminsCount: Clubs.findOne(clubId).adminEmails.length}
     });
   },
   removeClub: function(clubId){

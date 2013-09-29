@@ -7,7 +7,7 @@ Template.sendMessage.events = {
     var clubName = tmpl.find('#club-name-input').value;
     clubName = clubName.replace(/\s/g, '.');
     clubName = clubName.replace(/@/g, '');
-    var from = clubName + '@club.fest.on.meteor.com'
+    var from = clubName + '@ideas.on.meteor.com'
     var receivers;
     var emailToOptions = tmpl.find('#email-to').value;
     if (emailToOptions=='admins'){
@@ -23,7 +23,6 @@ Template.sendMessage.events = {
     }
     var sender = Meteor.user().services.google.email;
     var replyTo = sender;
-    console.log(receivers);
     Meteor.call('sendToMailingList', from, sender,
       receivers, replyTo, subject, content,
       function(err){
