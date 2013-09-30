@@ -8,7 +8,7 @@
       <div class='comment'>
         <div class='comment-content'>
           {{#if isAuthor}}  
-            <div data-comment-id="{{_id}}" class="comment-editable" data-type="text" data-emptytext="Click here to edit">
+            <div data-comment-id="{{_id}}" class="comment-editable" data-type="textarea" data-emptytext="Click here to edit">
               {{content}}
             </div>
           {{else}}
@@ -27,7 +27,7 @@
           <div class='response'>
             <div class='response-content'>
             {{#if isAuthor}}  
-              <div data-created-at="{{createdAt}}" class="response-editable" data-type="text" data-emptytext="Click here to edit">
+              <div data-created-at="{{createdAt}}" class="response-editable" data-type="textarea" data-emptytext="Click here to edit">
                 {{content}}
               </div>
             {{else}}

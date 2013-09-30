@@ -6,15 +6,15 @@
 #autopublish
 preserve-inputs
 bootstrap
-accounts-google
 accounts-ui
 email
 router
 bootstrap-wysihtml5
 standard-app-packages
 HTML5-History-API
-event-hooks
 page-js-ie-support
 spiderable
 bootboxjs
 x-editable-bootstrap
+accounts-facebook
+http

@@ -25,7 +25,7 @@
   margin-top: 20px;
 }
 #nav-wrapper, .clear-wrapper {
-  overflow: hidden;
+  /*overflow: hidden;*/
   width: 100%;
 }
 
@@ -44,8 +44,8 @@ p {
   #right-nav {
     margin-right: 5px;
     margin-top: 10px;
-    height: 25px;
-    overflow: hidden;
+/*    height: 25px;
+    overflow: hidden;*/
   }
 /*  .login-display-name {
     I don't know how to override display
@@ -62,12 +62,12 @@ p {
   #right-nav {
     margin-right: 5px;
     margin-top: 5px;
-    height: 25px;
-    overflow: hidden;
-  }
+/*    height: 25px;
+    overflow: hidden;*/
+/*  }
   .login-button {
     width: 55px;
-  }
+  }*/
 /*  .login-display-name {
     I don't know how to override display
     width: 0;

@@ -9,8 +9,9 @@ Meteor.methods({
     club.membersCount = 0;
     club.createdOn = new Date().getTime();
     club.memberEmails = [];
+    address = Meteor.user().services.facebook.email
     club.adminEmails = [{
-      address: Meteor.user().services.google.email,
+      address: address,
       createdOn: club.createdOn
     }];
     return Clubs.insert(club);
@@ -150,12 +151,12 @@ this.checkAdmin = function(clubId){
   }
 }
 function isSuperUser(){
-  return Meteor.user().services.google.email.toLowerCase() == 'club.fest.on.meteor@gmail.com'
+  return Meteor.user().services.facebook.email.toLowerCase() == 'chorhanglam@gmail.com'
 }
 function checkDuplicateName(title){
   var duplicate = Clubs.findOne({name: {$regex: title, $options: 'i'}});
   if (duplicate){
     throw new Meteor.Error(413, 
-      "Your club name is too similar to the following, existing club name: "+duplicate.name);
+      "Your project name is too similar to the following, existing project name: "+duplicate.name);
   }
 }

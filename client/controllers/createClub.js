@@ -1,3 +1,4 @@
+
 Template.createClub.categories = function(){
   return Categories.find({}, {sort: {name: 1}}).fetch();
 }
@@ -7,10 +8,16 @@ Template.createClub.events({
     evt.preventDefault();
     afterSignIn(function(){
       var newClub = tmplToClubObj(tmpl);
+
       Meteor.call('addInfoToClubAndInsert', newClub,
         function(err, newClubId){
           if (err) {alert(err.reason+'. Are you signed in?');}
           else {
+            var message = "I posted a new idea, "+newClub.name+":\n" + newClub.desc + "\n\n"
+              + "For more details, check out the link:\n"
+              + "http://ideas.on.meteor.com/clubId/"+newClubId;
+            var link = "http://ideas.on.meteor.com/clubId/"+newClubId;
+            postToGroup(message, link);
             Meteor.call("addClubToAdminRolesFirstTime",
               newClubId, Meteor.userId(),
               function(err, resultId){

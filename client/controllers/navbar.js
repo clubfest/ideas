@@ -1,3 +1,8 @@
+Accounts.ui.config({
+  requestPermissions: {
+    facebook: ['email', 'publish_stream'],
+  },
+});
 
 Template.navbar.currCategory = function(){
   var club = Clubs.findOne(Session.get('routedClubId'));

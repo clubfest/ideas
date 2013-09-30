@@ -12,7 +12,7 @@ Template.club.created = function(){
 Template.club.events = {
   'click #join-btn': function(){
     afterSignIn(function(){     
-      var email = Meteor.user().services.google.email;
+      var email = Meteor.user().services.facebook.email;
       Meteor.call('addUserEmailToMemberEmails',
         email, Session.get('routedClubId'),
         function(err, result){
@@ -27,7 +27,7 @@ Template.club.events = {
   },
   'click #unjoin-btn': function(){
     afterSignIn(function(){
-      var email = Meteor.user().services.google.email;
+      var email = Meteor.user().services.facebook.email;
       Meteor.call('removeUserEmailFromMemberEmails',
         email, Session.get('routedClubId'),
         function(err, result){

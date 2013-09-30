@@ -21,7 +21,7 @@ Template.sendMessage.events = {
         receivers.push(email.address);
       });
     }
-    var sender = Meteor.user().services.google.email;
+    var sender = Meteor.user().services.facebook.email;
     var replyTo = sender;
     Meteor.call('sendToMailingList', from, sender,
       receivers, replyTo, subject, content,

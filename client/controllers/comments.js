@@ -39,12 +39,23 @@ Template.comments.events({
     Meteor.call('sendToMailingList', from, receivers, cc, replyTo, subject, content, function(err){
       if (err) alert(err);
     });
+    message = content+"\n\n-- comment for http://ideas.on.meteor.com/clubId/"+clubId
+    postToGroup(message, "ideas.on.meteor.com");
   },
   'click .respond-btn': function(evt, tmpl){
+    var dom = evt.currentTarget;
+    var commentId = dom.dataset.commentId;
+    $(dom).prev().append("<textarea></textarea> <a class='btn respond-comment' data-comment-id='"+commentId+"'>Submit</a>");
+    $(dom).remove();
+  },
+  'click .respond-comment': function(evt, tmpl){
     var clubId = Session.get('routedClubId');
+    var dom = evt.currentTarget;
+    var commentId = dom.dataset.commentId;
+    var content = $(dom).prev().val();
     var options = {
-      commentId: evt.currentTarget.dataset.commentId,
-      content: "",
+      commentId: commentId,
+      content: content,
     }
     Meteor.call('addResponse', options, function(err){
       if (err){alert(err.reason);}
@@ -56,10 +67,11 @@ Template.comments.events({
     var cc = [];
     var replyTo = receivers;
     var subject = 'Someone gave you ideas some feedback';
-    var content = "Someone left you some feedback at ideas.on.meteor.com/clubId/" + clubId
-    Meteor.call('sendToMailingList', from, receivers, cc, replyTo, subject, content, function(err){
+    var message = content + "\n\n --response at ideas.on.meteor.com/clubId/" + clubId
+    Meteor.call('sendToMailingList', from, receivers, cc, replyTo, subject, message, function(err){
       if (err) alert(err);
     });
+    postToGroup(message, "ideas.on.meteor.com");
   },
 });
 
@@ -69,9 +81,8 @@ Template.comments.rendered = function(){
   $.fn.editable.defaults.mode = 'inline';
   $('.response-editable:not(.editable-click)').each(function(i, editor){
     $(editor).editable('destroy').editable({
+      inputclass: 'editting',
       success: function(response, newValue) {
-    console.log(editor.dataset);
-
         var options = {
           createdAt: editor.dataset.createdAt,
           content: newValue
@@ -84,6 +95,7 @@ Template.comments.rendered = function(){
   });
   $('.comment-editable:not(.editable-click)').each(function(i, editor){
     $(editor).editable('destroy').editable({
+      inputclass: 'editting',
       success: function(response, newValue) {
         var options = {
           commentId: editor.dataset.commentId,

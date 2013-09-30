@@ -32,7 +32,7 @@ Meteor.methods({
   },
   syncTempUserToUser: function(){
     var user = Meteor.user();
-    var email = user.services.google.email;
+    var email = user.services.facebook.email;
     var tempUser = TempUsers.findOne({"email": {$regex: new RegExp(email, 'i')}});
     if (!tempUser){
       throw new Meteor.Error(413, 'You do not have any to sync');

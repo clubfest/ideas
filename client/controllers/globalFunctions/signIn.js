@@ -5,7 +5,7 @@ this.afterSignIn = function(callback){
   if (Meteor.userId()) {
     return callback(Meteor.userId());
   } else {
-    Meteor.loginWithGoogle({}, function(err){
+    Meteor.loginWithFacebook({}, function(err){
       if (!err) {
         return callback(Meteor.userId());
       } else {

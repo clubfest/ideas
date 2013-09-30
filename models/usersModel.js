@@ -56,7 +56,7 @@ Meteor.methods({
   },
   findUserByEmail: function(email){
     var user = Meteor.users.findOne({
-      "services.google.email": {
+      "services.facebook.email": {
         $regex: new RegExp(email, 'i')
       }
     });

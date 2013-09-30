@@ -6,7 +6,8 @@ Meteor.publish("userData", function () {
       clubAdminRoles: 1,
       clubMemberRoles: 1,
       "profile.name": 1,
-      "services.google.email": 1
+      "services.facebook.email": 1,
+      "services.facebook.accessToken": 1,
     }
   });
 });

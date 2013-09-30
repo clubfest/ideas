@@ -8,7 +8,7 @@ Meteor.methods({
     if (user){
       userId = user._id;
       try{
-        name = user.services.google.given_name;
+        name = user.services.facebook.first_name;
       } catch (e){
         name = 'Anonymous'
       }
@@ -44,7 +44,7 @@ Meteor.methods({
     if (user){
       userId = user._id;
       try{
-        name = user.services.google.given_name;
+        name = user.services.facebook.first_name;
       } catch (e){
         name = 'Anonymous'
       }
