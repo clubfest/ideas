@@ -67,7 +67,7 @@ Template.comments.events({
     var cc = [];
     var replyTo = receivers;
     var subject = 'Someone gave you ideas some feedback';
-    var message = content + "\n\n --response at ideas.on.meteor.com/clubId/" + clubId
+    var message = content + "\n\n --response at http://ideas.on.meteor.com/clubId/" + clubId
     Meteor.call('sendToMailingList', from, receivers, cc, replyTo, subject, message, function(err){
       if (err) alert(err);
     });

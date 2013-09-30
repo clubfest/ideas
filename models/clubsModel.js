@@ -4,7 +4,7 @@ Meteor.methods({
   addInfoToClubAndInsert: function(club){
     checkSignedIn();
     checkClubFields(club);
-    checkDuplicateName(club.name);
+    // checkDuplicateName(club.name);
     club.adminsCount = 1;
     club.membersCount = 0;
     club.createdOn = new Date().getTime();
