@@ -2,7 +2,7 @@ Comments = new Meteor.Collection('comments');
 Meteor.methods({
   'addComment': function(options){
     var user = Meteor.user();
-    // if (!user) throw new Meteor.Error(413, 'Please sign in first.');
+    if (!user) throw new Meteor.Error(413, 'Please sign in first.');
     var name;
     var userId = null;
     if (user){
@@ -38,7 +38,7 @@ Meteor.methods({
   },
   'addResponse': function(options){
     var user = Meteor.user();
-    // if (!user) throw new Meteor.Error(413, 'Please sign in first.');
+    if (!user) throw new Meteor.Error(413, 'Please sign in first.');
     var name;
     var userId = null;
     if (user){

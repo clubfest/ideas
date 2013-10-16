@@ -127,9 +127,9 @@ function checkClubFields(club){
   // check(club.createdOn, Number);
   // make sure the new club has nice front content
   if (club.name.length > 140){
-    throw new Meteor.Error(413, 'Club name is too long.');
+    throw new Meteor.Error(413, 'Name is too long.');
   } else if (club.name.length < 1){
-    throw new Meteor.Error(413, 'Missing club name.');
+    throw new Meteor.Error(413, 'Missing project name.');
   } else if (club.desc.length > 140){
     throw new Meteor.Error(413, 'Description is too long.');
   } else if (club.desc.length < 1){
