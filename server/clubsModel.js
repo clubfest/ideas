@@ -1,1 +1,3 @@
-Clubs._ensureIndex('name', {unique: 1})
+Clubs._ensureIndex('name', {
+  unique: 1
+})

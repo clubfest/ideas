@@ -1,3 +1,5 @@
-Deps.autorun(function(){
-  Meteor.subscribe('allComments', {clubId: Session.get('routedClubId')});
+Deps.autorun(function() {
+  Meteor.subscribe('allComments', {
+    clubId: Session.get('routedClubId')
+  });
 })

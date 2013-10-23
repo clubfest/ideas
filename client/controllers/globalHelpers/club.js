@@ -1,6 +1,5 @@
-
 // Used for club.html and editClub.html
-Handlebars.registerHelper('isClubAdmin', function(){
+Handlebars.registerHelper('isClubAdmin', function() {
   var clubId = Session.get('routedClubId');
   return isClubAdmin(clubId);
 });
@@ -59,5 +58,3 @@ Handlebars.registerHelper('isClubAdmin', function(){
 //   }
 //   return answer;
 // }
-
-

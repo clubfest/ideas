@@ -1,7 +1,7 @@
 Meteor.startup(function() {
   // Categories.remove({});
   // Clubs.remove({});
-  if (Categories.find().count()===0){
+  if (Categories.find().count() === 0) {
     Categories.insert({
       name: "Social",
       desc: "Facebook and Twitter"

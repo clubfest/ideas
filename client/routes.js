@@ -2,41 +2,41 @@ Meteor.Router.add({
   '/': 'home',
   '/instruction': 'instruction',
   '/createClub': 'createClub',
-  '/categoryId/:id': function(id){
+  '/categoryId/:id': function(id) {
     Session.set('routedCategoryId', id);
     return 'category';
   },
-  '/allClubs': function(){
+  '/allClubs': function() {
     Session.set('routedClubName', '');
     return 'clubsByName';
   },
-  '/clubId/:id': function(id){
+  '/clubId/:id': function(id) {
     Session.set('routedClubId', id);
     return 'club'
   },
-  '/edit/clubId/:id': function(id){
+  '/edit/clubId/:id': function(id) {
     Session.set('routedClubId', id);
     return 'editClub';
   },
-  '/profile': function(){
+  '/profile': function() {
     return 'profile'
   },
-  '/mailingList/:id': function(id){
+  '/mailingList/:id': function(id) {
     Session.set('routedClubId', id);
     return 'mailingList';
   },
-  '/sync': function(){
+  '/sync': function() {
     return 'sync';
   },
-  '/sendMessage/:id': function(id){
+  '/sendMessage/:id': function(id) {
     Session.set('routedClubId', id);
     return 'sendMessage';
   },
-  '/name': function(){
+  '/name': function() {
     Session.set('routedClubName', '');
     return 'clubsByName';
   },
-  '/name/:clubName': function(clubName){
+  '/name/:clubName': function(clubName) {
     Session.set('routedClubName', clubName);
     return 'clubsByName';
   },

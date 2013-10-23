@@ -1,50 +1,50 @@
-Template.editClub.created = function(){
+Template.editClub.created = function() {
   Session.set('atClubHome', false)
 }
 
-Template.editClub.getClub = function(){
+Template.editClub.getClub = function() {
   return Clubs.findOne(Session.get('routedClubId'));
 }
 
 
 Template.editClub.events({
-  'click #save-content': function(evt, tmpl){
+  'click #save-content': function(evt, tmpl) {
     var clubId = Session.get('routedClubId');
     var content = tmpl.find('#content-editor').value;
     Meteor.call('updateClubContent',
       clubId, content,
-      function(err){
-        if (err){
+      function(err) {
+        if (err) {
           alert(err.reason);
         } else {
-          Meteor.Router.to('/clubId/'+clubId);
+          Meteor.Router.to('/clubId/' + clubId);
         }
       }
     );
   },
-  'click #save-info': function(evt, tmpl){
+  'click #save-info': function(evt, tmpl) {
     var clubId = Session.get('routedClubId');
     var name = tmpl.find('#name-editor').value;
     var desc = tmpl.find('#desc-editor').value;
     Meteor.call('updateClubInfo',
-      clubId, name, desc, 
-      function(err){
-        if (err){
+      clubId, name, desc,
+      function(err) {
+        if (err) {
           alert(err.reason);
         }
       }
     )
   },
-  'click #remove-btn': function(){
+  'click #remove-btn': function() {
     var clubId = Session.get('routedClubId');
-    Meteor.call('removeClub', clubId, function(err){
-      if (err){
+    Meteor.call('removeClub', clubId, function(err) {
+      if (err) {
         alert(err);
       } else {
-        Meteor.call('removeClubFromAdminRoles', 
+        Meteor.call('removeClubFromAdminRoles',
           clubId, Meteor.userId(),
-          function(){
-            if (err){
+          function() {
+            if (err) {
               alert(err);
             }
           }
@@ -80,7 +80,7 @@ Template.editClub.events({
 });
 
 
-Template.editClub.rendered = function(){
+Template.editClub.rendered = function() {
   $('#content-editor').wysihtml5('deepExtend', {
     parserRules: {
       tags: {
@@ -91,8 +91,7 @@ Template.editClub.rendered = function(){
             height: "numbers"
           }
         },
-        p: {
-        }
+        p: {}
       }
     },
     html: true,

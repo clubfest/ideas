@@ -6,6 +6,6 @@
 //   }
 // });
 
-Meteor.publish('allTempUsers', function(){
+Meteor.publish('allTempUsers', function() {
   return TempUsers.find();
 });

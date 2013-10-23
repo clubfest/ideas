@@ -1,5 +1,5 @@
 Template.sendMessage.events = {
-  'click #send-btn': function(evt, tmpl){
+  'click #send-btn': function(evt, tmpl) {
     evt.preventDefault();
     var clubId = Session.get('routedClubId');
     var subject = tmpl.find('#email-subject').value;
@@ -10,13 +10,13 @@ Template.sendMessage.events = {
     var from = clubName + '@ideas.on.meteor.com'
     var receivers;
     var emailToOptions = tmpl.find('#email-to').value;
-    if (emailToOptions=='admins'){
-      receivers = _.map(Clubs.findOne(clubId).adminEmails, function(email){
+    if (emailToOptions == 'admins') {
+      receivers = _.map(Clubs.findOne(clubId).adminEmails, function(email) {
         return email.address;
       });
     } else {
       receivers = []
-      _.each(Clubs.findOne(clubId).memberEmails, function(email){
+      _.each(Clubs.findOne(clubId).memberEmails, function(email) {
         // if (receivers.indexOf(email.address) > -1){}
         receivers.push(email.address);
       });
@@ -25,47 +25,47 @@ Template.sendMessage.events = {
     var replyTo = sender;
     Meteor.call('sendToMailingList', from, sender,
       receivers, replyTo, subject, content,
-      function(err){
-        if (err){
+      function(err) {
+        if (err) {
           alert(err.reason);
         } else {
           alert('message sent :-)')
-          Meteor.Router.to('/clubId/'+Session.get('routedClubId'));
+          Meteor.Router.to('/clubId/' + Session.get('routedClubId'));
         }
       }
     )
   },
-  'click #gmail-btn': function(evt, tmpl){
+  'click #gmail-btn': function(evt, tmpl) {
     evt.preventDefault();
     var clubId = Session.get('routedClubId');
     var subject = tmpl.find('#email-subject').value;
     var content = tmpl.find('#email-content').value;
     var clubName = tmpl.find('#club-name-input').value;
     var adminArray = [];
-    _.each(Clubs.findOne(clubId).adminEmails, function(email){
+    _.each(Clubs.findOne(clubId).adminEmails, function(email) {
       adminArray.push(email.address);
     });
     var emailToOptions = tmpl.find('#email-to').value;
     var memberArray = [];
-    if (emailToOptions=='members'){
-      _.each(Clubs.findOne(clubId).memberEmails, function(email){
+    if (emailToOptions == 'members') {
+      _.each(Clubs.findOne(clubId).memberEmails, function(email) {
         memberArray.push(email.address);
       });
     }
-    var gmailUrl = 'http://mail.google.com/mail/?view=cm&fs=1'+
-                '&to=' + adminArray.join() +
-                '&bcc=' + memberArray.join() +
-                '&su=' + subject +
-                '&body=' + content +
-                '&ui=1';
+    var gmailUrl = 'http://mail.google.com/mail/?view=cm&fs=1' +
+      '&to=' + adminArray.join() +
+      '&bcc=' + memberArray.join() +
+      '&su=' + subject +
+      '&body=' + content +
+      '&ui=1';
     window.open(gmailUrl, '_blank');
   }
 }
 
-Template.sendMessage.club = function(){
+Template.sendMessage.club = function() {
   return Clubs.findOne(Session.get('routedClubId'))
 }
 
-Template.sendMessage.created = function(){
+Template.sendMessage.created = function() {
   Session.set('atClubHome', false)
 }
