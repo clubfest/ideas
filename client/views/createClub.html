@@ -14,18 +14,22 @@
       <option value='{{_id}}'>{{name}}</option>
     {{/each}}
   </select>
-  <br/>
-  <input type='submit' value='create'/>
-</form>
+  <h3>Examples</h3>
+  <ul class='no-bullet'>
+    {{#each categories}}
+      <li>
+        <a href="/categoryId/{{_id}}">{{name}}</a>: {{desc}}</li>
+      </li>
+    {{/each}}
+  </ul>
 
-<h3>Examples</h3>
-<ul class='no-bullet'>
-  {{#each categories}}
-    <li>
-      <a href="/categoryId/{{_id}}">{{name}}</a>: {{desc}}</li>
-    </li>
-  {{/each}}
-</ul>
+  <br/>
+
+  <textarea id='content-editor' placeholder="Describe your project in details."></textarea>
+  <div style="clear: both;"></div>
+
+  <input class='btn-primary btn' type='submit' value='create'/>
+</form>
   
 
 </template>

@@ -2,6 +2,17 @@
 {{#if isClubAdmin}}
   {{#with getClub}}
     {{> clubAdminNavbar}}
+    <h3>Edit Club Info</h3>
+    <h4>Club name</h4>
+    <input id='name-editor' value="{{name}}"/>
+    <h4>Description</h4>
+    <textarea id='desc-editor'>{{desc}}</textarea>
+    <div>
+      <a id='save-info' class='btn'>Save info</a>    
+    </div>
+
+    <br>
+
     <div style="clear: both;"></div>
     <h2>{{name}}</h2>
     <textarea id='content-editor'>{{{content}}}</textarea>
@@ -10,20 +21,7 @@
       <a style='margin-left: 10px' class='btn' href='/clubId/{{_id}}'>Cancel</a>
     </div>
 
-    <h3>Edit Club Info</h3>
-    <h4>Club name</h4>
-    <input id='name-editor' value="{{name}}"/>
-    <h4>Description</h4>
-    <textarea id='desc-editor'>
-      {{desc}}
-    </textarea>
-    <div>
-      <a id='save-info' class='btn'>Save info</a>    
-    </div>
-
     <div style='margin-top: 20px;'><a id='remove-btn' class='btn btn-danger'>Remove your club</a></div>
-
-
   {{/with}}
 {{/if}}
 
