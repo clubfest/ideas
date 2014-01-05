@@ -1,15 +1,15 @@
 Comments = new Meteor.Collection('comments');
 Meteor.methods({
-  'addComment': function(options){
+  'addComment': function(options) {
     var user = Meteor.user();
     if (!user) throw new Meteor.Error(413, 'Please sign in first.');
     var name;
     var userId = null;
-    if (user){
+    if (user) {
       userId = user._id;
-      try{
+      try {
         name = user.services.facebook.first_name;
-      } catch (e){
+      } catch (e) {
         name = 'Anonymous'
       }
     } else {
@@ -24,28 +24,28 @@ Meteor.methods({
       date: new Date().toDateString()
     });
   },
-  'editComment': function(options){
+  'editComment': function(options) {
     var user = Meteor.user();
     if (!user) throw new Meteor.Error(413, 'Please sign in first.');
-    if (Meteor.isServer){
+    if (Meteor.isServer) {
       Comments.update(options.commentId, {
         $set: {
           "content": options.content,
           "date": new Date().toDateString(),
         }
       });
-    } 
+    }
   },
-  'addResponse': function(options){
+  'addResponse': function(options) {
     var user = Meteor.user();
     if (!user) throw new Meteor.Error(413, 'Please sign in first.');
     var name;
     var userId = null;
-    if (user){
+    if (user) {
       userId = user._id;
-      try{
+      try {
         name = user.services.facebook.first_name;
-      } catch (e){
+      } catch (e) {
         name = 'Anonymous'
       }
     } else {
@@ -63,16 +63,18 @@ Meteor.methods({
       }
     });
   },
-  'editResponse': function(options){
+  'editResponse': function(options) {
     var user = Meteor.user();
     if (!user) throw new Meteor.Error(413, 'Please sign in first.');
-    if (Meteor.isServer){
-      Comments.update({"responses.createdAt": options.createdAt}, {
+    if (Meteor.isServer) {
+      Comments.update({
+        "responses.createdAt": options.createdAt
+      }, {
         $set: {
           "responses.$.content": options.content,
           "responses.$.date": new Date().toDateString(),
         }
       });
-    } 
+    }
   },
 })

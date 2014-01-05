@@ -1,7 +1,6 @@
-
 // In your server code: define a method that the client can call
 Meteor.methods({
-  sendEmail: function (to, from, subject, text) {
+  sendEmail: function(to, from, subject, text) {
     check([from, subject, text], [String]);
 
     // Let other method calls from the same client start running,
@@ -15,7 +14,7 @@ Meteor.methods({
       text: text
     });
   },
-  sendToMailingList: function (from, to, cc, replyTo, subject, text) {
+  sendToMailingList: function(from, to, cc, replyTo, subject, text) {
     check([from, subject, text], [String]);
 
     // Let other method calls from the same client start running,

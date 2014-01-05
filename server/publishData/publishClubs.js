@@ -1,4 +1,4 @@
-Meteor.publish('allClubs', function(){
+Meteor.publish('allClubs', function() {
   return Clubs.find({}, {
     fields: {
       memberEmails: 0
@@ -6,13 +6,17 @@ Meteor.publish('allClubs', function(){
   });
 });
 
-Meteor.publish('yourClubs', function(){
+Meteor.publish('yourClubs', function() {
   var userId = this.userId;
-  if (userId){
+  if (userId) {
     var user = Meteor.users.findOne(userId);
-    var clubIds = _.map(user.clubAdminRoles, function(role){
+    var clubIds = _.map(user.clubAdminRoles, function(role) {
       return role._id;
     });
-    return Clubs.find({_id: {$in: clubIds}});
+    return Clubs.find({
+      _id: {
+        $in: clubIds
+      }
+    });
   }
 });

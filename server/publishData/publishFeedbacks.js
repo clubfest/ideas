@@ -1,3 +1,3 @@
-Meteor.publish('allFeedbacks', function(){
+Meteor.publish('allFeedbacks', function() {
   return Feedbacks.find();
 });

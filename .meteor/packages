@@ -18,3 +18,5 @@ bootboxjs
 x-editable-bootstrap
 accounts-facebook
 http
+
+event-hooks

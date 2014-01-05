@@ -1,3 +1,3 @@
-Template.clubAdminNavbar.atClubHome = function(){
+Template.clubAdminNavbar.atClubHome = function() {
   return Session.get('atClubHome');
 }

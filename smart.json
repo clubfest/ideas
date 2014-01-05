@@ -2,6 +2,8 @@
   "packages": {
     "router": {},
     "event-hooks": {},
-    "bootboxjs": {}
+    "bootboxjs": {},
+    "bootstrap-wysihtml5": {},
+    "x-editable-bootstrap": {}
   }
 }

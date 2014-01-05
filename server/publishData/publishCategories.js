@@ -1,3 +1,3 @@
-Meteor.publish('allCategories', function(){
+Meteor.publish('allCategories', function() {
   return Categories.find();
 });

@@ -1,7 +1,7 @@
 Clubs = new Meteor.Collection('Clubs')
 
 Meteor.methods({
-  addInfoToClubAndInsert: function(club){
+  addInfoToClubAndInsert: function(club) {
     checkSignedIn();
     checkClubFields(club);
     // checkDuplicateName(club.name);
@@ -16,64 +16,104 @@ Meteor.methods({
     }];
     return Clubs.insert(club);
   },
-  updateClubContent: function(clubId, newContent){
+  updateClubContent: function(clubId, newContent) {
     checkSignedIn();
     checkAdmin(clubId);
-    return Clubs.update(clubId, {$set: {content: newContent}});
+    return Clubs.update(clubId, {
+      $set: {
+        content: newContent
+      }
+    });
   },
-  updateClubInfo: function(clubId, name, desc){
+  updateClubInfo: function(clubId, name, desc) {
     var club = Clubs.findOne(clubId);
     club.name = name;
-    club.desc = desc;    
+    club.desc = desc;
     checkSignedIn();
     checkAdmin(clubId);
     checkClubFields(club);
-    return Clubs.update(clubId, {$set: {
-      name: name,
-      desc: desc,
-    }});
+    return Clubs.update(clubId, {
+      $set: {
+        name: name,
+        desc: desc,
+      }
+    });
   },
-  addListServName: function(name, clubId){
+  addListServName: function(name, clubId) {
     checkAdmin(clubId);
-    Clubs.update(clubId, {$set: {listServ: name}});
+    Clubs.update(clubId, {
+      $set: {
+        listServ: name
+      }
+    });
   },
-  addUserEmailToMemberEmails: function(email, clubId){
+  addUserEmailToMemberEmails: function(email, clubId) {
     check(email, String);
     //checkDuplicateEmail(email, clubId);
     // checkAdmin(clubId);
     Clubs.update(clubId, {
-      $push: {memberEmails: {address: email, createdOn: new Date().getTime()}}
+      $push: {
+        memberEmails: {
+          address: email,
+          createdOn: new Date().getTime()
+        }
+      }
     });
-    Clubs.update(clubId, {$inc: {membersCount: 1}});
+    Clubs.update(clubId, {
+      $inc: {
+        membersCount: 1
+      }
+    });
   },
-  removeUserEmailFromMemberEmails: function(email, clubId){
+  removeUserEmailFromMemberEmails: function(email, clubId) {
     // checkAdmin(clubId);
     Clubs.update(clubId, {
-      $pull: {memberEmails: {address: email}}
+      $pull: {
+        memberEmails: {
+          address: email
+        }
+      }
     });
     Clubs.update(clubId, {
-      $set: {membersCount: Clubs.findOne(clubId).memberEmails.length}
+      $set: {
+        membersCount: Clubs.findOne(clubId).memberEmails.length
+      }
     });
   },
-  addUserEmailToAdminEmails: function(email, clubId){
+  addUserEmailToAdminEmails: function(email, clubId) {
     checkAdmin(clubId);
     checkDuplicateAdminEmail(email, clubId);
     Clubs.update(clubId, {
-      $push: {adminEmails: {address: email, createdOn: new Date().getTime()}}
+      $push: {
+        adminEmails: {
+          address: email,
+          createdOn: new Date().getTime()
+        }
+      }
     });
-    Clubs.update(clubId, {$inc: {adminsCount: 1}});
+    Clubs.update(clubId, {
+      $inc: {
+        adminsCount: 1
+      }
+    });
   },
-  removeUserEmailFromAdminEmails: function(email, clubId){
+  removeUserEmailFromAdminEmails: function(email, clubId) {
     checkAdmin(clubId);
     Clubs.update(clubId, {
-      $pull: {adminEmails: {address: email}}
+      $pull: {
+        adminEmails: {
+          address: email
+        }
+      }
     });
     Clubs.update(clubId, {
-      $set: {adminsCount: Clubs.findOne(clubId).adminEmails.length}
+      $set: {
+        adminsCount: Clubs.findOne(clubId).adminEmails.length
+      }
     });
   },
-  removeClub: function(clubId){
-    if (!isSuperUser()){
+  removeClub: function(clubId) {
+    if (!isSuperUser()) {
       checkAdmin(clubId);
     }
     // var club = Clubs.findOne(clubId);
@@ -87,38 +127,40 @@ Meteor.methods({
     //   })
     // }
     Clubs.update(clubId, {
-      $set: {removed: true}
+      $set: {
+        removed: true
+      }
     });
-    
+
   }
 })
 
-function checkDuplicateEmail(email, clubId){
+function checkDuplicateEmail(email, clubId) {
   email = email.toLowerCase();
   var club = Clubs.findOne(clubId);
   console.log('clubId is ', club)
-  if (!club.memberEmails){
+  if (!club.memberEmails) {
     return;
   }
-  for (var i=0; i<club.memberEmails.length; i++){
-    if (club.memberEmails[i].address.toLowerCase() == email){
+  for (var i = 0; i < club.memberEmails.length; i++) {
+    if (club.memberEmails[i].address.toLowerCase() == email) {
       throw new Meteor.Error(413, 'The email you are trying to add is duplicate.')
     }
   }
 }
 
-function checkDuplicateAdminEmail(email, clubId){
+function checkDuplicateAdminEmail(email, clubId) {
   email = email.toLowerCase();
   var club = Clubs.findOne(clubId);
-  for (var i=0; i<club.adminEmails.length; i++){
-    if (club.adminEmails[i].address.toLowerCase() == email){
+  for (var i = 0; i < club.adminEmails.length; i++) {
+    if (club.adminEmails[i].address.toLowerCase() == email) {
       throw new Meteor.Error(413, 'The email you are trying to add is duplicate.')
     }
   }
 }
 
 
-function checkClubFields(club){
+function checkClubFields(club) {
   // prevent mongo attack
   check(club.name, String);
   check(club.desc, String);
@@ -126,37 +168,44 @@ function checkClubFields(club){
   check(club.categoryName, String);
   // check(club.createdOn, Number);
   // make sure the new club has nice front content
-  if (club.name.length > 140){
+  if (club.name.length > 140) {
     throw new Meteor.Error(413, 'Name is too long.');
-  } else if (club.name.length < 1){
+  } else if (club.name.length < 1) {
     throw new Meteor.Error(413, 'Missing project name.');
-  } else if (club.desc.length > 140){
+  } else if (club.desc.length > 140) {
     throw new Meteor.Error(413, 'Description is too long.');
-  } else if (club.desc.length < 1){
+  } else if (club.desc.length < 1) {
     throw new Meteor.Error(413, 'Missing Description.');
-  } else if (club.categoryName.length < 1){
+  } else if (club.categoryName.length < 1) {
     throw new Meteor.Error(413, 'Pick a catgory.');
   }
 }
 
-function checkSignedIn(){
-  if (!Meteor.userId()){
+function checkSignedIn() {
+  if (!Meteor.userId()) {
     throw new Meteor.Error(413, 'Please sign in first');
   }
 }
 
-this.checkAdmin = function(clubId){
-  if (!isClubAdmin(clubId)){
+this.checkAdmin = function(clubId) {
+  if (!isClubAdmin(clubId)) {
     throw new Meteor.Error(413, "Only admin can edit.");
   }
 }
-function isSuperUser(){
+
+function isSuperUser() {
   return Meteor.user().services.facebook.email.toLowerCase() == 'chorhanglam@gmail.com'
 }
-function checkDuplicateName(title){
-  var duplicate = Clubs.findOne({name: {$regex: title, $options: 'i'}});
-  if (duplicate){
-    throw new Meteor.Error(413, 
-      "Your project name is too similar to the following, existing project name: "+duplicate.name);
+
+function checkDuplicateName(title) {
+  var duplicate = Clubs.findOne({
+    name: {
+      $regex: title,
+      $options: 'i'
+    }
+  });
+  if (duplicate) {
+    throw new Meteor.Error(413,
+      "Your project name is too similar to the following, existing project name: " + duplicate.name);
   }
 }
