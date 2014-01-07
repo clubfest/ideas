@@ -43,6 +43,7 @@ function routeToClub(newClubId) {
 
 function tmplToClubObj(tmpl) {
   var catId = tmpl.find('#categoryId').value;
+  var content = tmpl.find('#content-editor').value;
   var cat = Categories.findOne(catId);
   if (!cat) {
     catName = ""
@@ -55,13 +56,27 @@ function tmplToClubObj(tmpl) {
     desc: description,
     categoryId: catId,
     categoryName: catName,
-    content: '<h3>Problem</h3> \
-      \n<p>Life is too hard</p> \
-      \n<h3>Solution</h3> \
-      \n<p>Click edit to answer</p>'
+    content: content,
   };
 }
 
+Template.createClub.rendered = function() {
+  $('#content-editor').wysihtml5('deepExtend', {
+    parserRules: {
+      tags: {
+        iframe: {
+          "check_attributes": {
+            src: "url",
+            width: "numbers",
+            height: "numbers"
+          }
+        },
+        p: {}
+      }
+    },
+    html: true,
+  });
+}
 
 // function findError(title, description, category){
 //   if (title.length > 140){
