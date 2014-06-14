@@ -1,33 +1,35 @@
+## About
+This is an app that helps a club 
+
+* manage members mailing list
+* manage admins mailing list
+* send emails to members or admins
+* add members using email
+* remove member and add or remove admins
+
+It also allows members to
+
+* remove himself from a mailing list
+* add and remove himself from a club
+
+[Here is a Demo](http://club.fest.on.meteor.com)
+
+
 ## Bugs
 
-* emails have duplicate
-* videos
-* logins on phones
+* logins on phone does not always work
 
 ## TODO
 
 * bcc only for members-wide email.
-
-Remove userId for all the Meteor.methods for better security
-
-Refactor navbar's use of Session
-Separate concerns: add an edit page for the mailing list, so that things there can be editted, and then add a clean mailing list where you send messages
-
-Make the page a single page app (on the same level).
-
-Callback hell: learn to user Q.defer
-
-Add buttons to remove icon
-
-Security: addRole need to be restricted to admin of club or if it's the current user
-
-Security: publish restricted club, as it contains emails
-
-Create temporary user account, with email, clubMemberRoles and clubAdminRoles
-
-Make navbar dynamic, using session to add things like the category the club is in.
-
-Adding email should be a textarea, so that we can parse multiple emails
+* duplicate allowed
+* Meteor.methods should not take in userId
+* Refactor navbar's use of Session
+* Perform case-insentive sort
+* Limit info in club publication
+* Create temporary user account, with email, clubMemberRoles and clubAdminRoles
+* Make navbar dynamic, using session to add things like the category the club is in.
+* Adding email should be a textarea, so that we can parse multiple emails
 
 Future: Find an api that autocomplete cmail addresses.
 
@@ -38,6 +40,3 @@ Future: Add a search box that eliminates result on the fly
 Add a Discarded Club section.
 
 
-## Minor
-
-Can mongodb do case-insentive sort
