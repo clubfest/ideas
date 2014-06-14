@@ -13,6 +13,7 @@ It also allows members to
 * add and remove himself from a club
 
 [Here is a Demo](http://ideas.on.meteor.com)
+
 [Here is another Demo](http://club.fest.on.meteor.com)
 
 
